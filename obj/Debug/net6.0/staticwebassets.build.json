@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "D+FvDVdwOZZNCb+gPgz3KrZjVaZBjoF7r42pfo643WM=",
-  "Source": "DBInventarioZeusAPI",
-  "BasePath": "_content/DBInventarioZeusAPI",
+  "Hash": "R99hzTk0db/7S0pYdqWwGXZuucaiF8L70F1JdmWLWD4=",
+  "Source": "ContabilidadZeusAPI",
+  "BasePath": "_content/ContabilidadZeusAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
