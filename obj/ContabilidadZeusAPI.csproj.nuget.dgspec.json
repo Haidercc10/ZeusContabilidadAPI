@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Desarrollo1\\source\\repos\\DBContabilidadZeusAPI\\ContabilidadZeusAPI.csproj": {}
+    "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Desarrollo1\\source\\repos\\DBContabilidadZeusAPI\\ContabilidadZeusAPI.csproj": {
+    "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Desarrollo1\\source\\repos\\DBContabilidadZeusAPI\\ContabilidadZeusAPI.csproj",
+        "projectUniqueName": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "projectName": "ContabilidadZeusAPI",
-        "projectPath": "C:\\Users\\Desarrollo1\\source\\repos\\DBContabilidadZeusAPI\\ContabilidadZeusAPI.csproj",
-        "packagesPath": "C:\\Users\\Desarrollo1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Desarrollo1\\source\\repos\\DBContabilidadZeusAPI\\obj\\",
+        "projectPath": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "packagesPath": "C:\\Users\\SANDRA\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Desarrollo1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\SANDRA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,7 +50,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.6, )"
+              "version": "[7.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -56,7 +60,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.6, )"
+              "version": "[7.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -70,11 +74,11 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[13.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
