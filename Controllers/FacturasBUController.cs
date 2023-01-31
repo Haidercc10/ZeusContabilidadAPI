@@ -137,6 +137,7 @@ namespace ContabilidadZeusAPI.Controllers
                       where fac.Sactfac > 0
                             && cli.Idcliente == fac.Idcliprv
                             && fac.Idcliprv == cliente
+                            && vendedor.Idvende == fac.Idvende
                             && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
                       orderby fac.Numefac ascending
                       select new
