@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DBInventarioZeusAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContabilidadZeusAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize]
     public class ClientesController : ControllerBase
     {
         private readonly ContabilidadContext _context;
