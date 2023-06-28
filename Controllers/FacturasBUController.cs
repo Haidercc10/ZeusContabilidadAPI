@@ -50,7 +50,23 @@ namespace ContabilidadZeusAPI.Controllers
             return cliente;
         }
 
-        //CARTERA TOTAL
+        // CARTERA TOTAL
+        [HttpGet("getCartera")]
+        public ActionResult GetCartera()
+        {
+            var con = (from f in _context.Set<FacturasBu>()
+                       from c in _context.Set<Cliente>()
+                       from v in _context.Set<Maevende>()
+                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
+                       where f.Sactfac > 0
+                             && c.Idcliente == f.Idcliprv
+                             && v.Idvende == f.Idvende
+                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu                      
+                       select f.Sactfac).Sum();
+            return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
+        }
+
+        //CARTERA TOTAL POR FACTURA
         [HttpGet("getCarteraTotal")]
         public ActionResult GetCarteraTotal()
         {
@@ -162,6 +178,60 @@ namespace ContabilidadZeusAPI.Controllers
                           Id_Cliente = fac.Idcliprv,
                           Ciudad_Cliente = cli.Ciudad,
                           Plazo_De_Pago = cli.Diplazo,
+                      };
+            return Ok(con);
+        }
+
+        //CARTERA POR AGRUPADA POR CLIENTES
+        [HttpGet("getCarteraAgrupadaClientes")]
+        public ActionResult GetCarteraAgrupadaClientes()
+        {
+            var con = from f in _context.Set<FacturasBu>()
+                      from c in _context.Set<Cliente>()
+                      from v in _context.Set<Maevende>()
+                      join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
+                      where f.Sactfac > 0
+                            && c.Idcliente == f.Idcliprv
+                            && v.Idvende == f.Idvende
+                            && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                      group new { f, c, v } by new
+                      {
+                          c.Idcliente,
+                          c.Razoncial,
+                          v.Nombvende,
+                          f.Idvende
+                      } into f
+                      select new
+                      {
+                          f.Key.Idcliente,
+                          f.Key.Razoncial,
+                          f.Key.Nombvende,
+                          f.Key.Idvende,
+                          SubTotal = f.Sum(x => x.f.Sactfac)
+                      };
+            return con.Count() > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
+        }
+
+        //CARTERA POR AGRUPADA POR VENDEDORES
+        [HttpGet("getCarteraAgrupadaVendedores")]
+        public ActionResult GetCarteraAgrupadaVendedores()
+        {
+            var con = from f in _context.Set<FacturasBu>()
+                      from v in _context.Set<Maevende>()
+                      join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
+                      where f.Sactfac > 0
+                            && v.Idvende == f.Idvende
+                            && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                      group new { f, v } by new
+                      {
+                          v.Nombvende,
+                          v.Idvende
+                      } into f
+                      select new
+                      {
+                          f.Key.Nombvende,
+                          f.Key.Idvende,
+                          SubTotal = f.Sum(x => x.f.Sactfac)
                       };
             return Ok(con);
         }
