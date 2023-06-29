@@ -70,8 +70,10 @@ namespace ContabilidadZeusAPI.Controllers
                                             where S2.Idprove == S.Idprove
                                             select S2.Anomescta).Max() &&
                             S.Codicta == cuenta &&
-                            S.Sdaccta != 0
-                      group new { S, P } by new
+                            S.Sdaccta != 0 &&
+                            P.Idprove != (900458314).ToString() &&
+                            P.Idprove != (900362200).ToString()
+                       group new { S, P } by new
                       {
                           S.Idprove,
                           P.Razoncial,
