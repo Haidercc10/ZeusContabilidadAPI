@@ -58,5 +58,51 @@ namespace ContabilidadZeusAPI.Controllers
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
             return Ok(con);
         }
+
+        //Consulta que devolverá la información de lo que se debia a proveedores en cada uno de los meses del año
+        [HttpGet("getCostosProveedores_Mes_Mes/{anio}/{cuenta}")]
+        public ActionResult GetCostosProveedores_Mes_Mes(string anio, string cuenta)
+        {
+            var invergoal = from F in _context.Set<FacturasBuLibroPrincipal>()
+                            where F.Codicta == cuenta &&
+                                  F.Anomesfac.Contains(anio) && 
+                                  F.Idcliprv == "900362200"
+                            group F by new { F.Anomesfac }
+                            into F
+                            select new
+                            {
+                                Periodo = F.Key.Anomesfac,
+                                Costo = F.Sum(x => x.Sactfac),
+                                Empresa = "Invergoal SAS"
+                            };
+
+            var inversuez = from F in _context.Set<FacturasBuLibroPrincipal>()
+                            where F.Codicta == cuenta &&
+                                  F.Anomesfac.Contains(anio) &&
+                                  F.Idcliprv == "900458314"
+                            group F by new { F.Anomesfac }
+                            into F
+                            select new
+                            {
+                                Periodo = F.Key.Anomesfac,
+                                Costo = F.Sum(x => x.Sactfac),
+                                Empresa = "Inversuez SAS"
+                            };
+
+            var plasticaribe = from F in _context.Set<FacturasBuLibroPrincipal>()
+                               where F.Codicta == cuenta &&
+                                     F.Anomesfac.Contains(anio) &&
+                                     F.Idcliprv != "900458314" &&
+                                     F.Idcliprv != "900362200"
+                               group F by new { F.Anomesfac }
+                               into F
+                               select new
+                               {
+                                   Periodo = F.Key.Anomesfac,
+                                   Costo = F.Sum(x => x.Sactfac),
+                                   Empresa = "Plasticaribe SAS"
+                               };
+            return Ok(plasticaribe.Concat(invergoal).Concat(inversuez));
+        }
     }
 }

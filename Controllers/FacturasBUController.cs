@@ -66,6 +66,32 @@ namespace ContabilidadZeusAPI.Controllers
             return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
         }
 
+        // CARTERA POR AÑO Y MES
+        [HttpGet("getCartera_Anio_Mes/{anio}/{mes}")]
+        public ActionResult GetCartera_Anio_Mes(string anio, string mes)
+        {
+#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
+            var con = (from f in _context.Set<FacturasBu>()
+                       from c in _context.Set<Cliente>()
+                       from v in _context.Set<Maevende>()
+                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
+                       where f.Sactfac > 0
+                             && c.Idcliente == f.Idcliprv
+                             && v.Idvende == f.Idvende
+                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                             && (from fac2 in _context.Set<FacturasBu>()
+                                 where fac2.Numefac == f.Numefac
+                                 orderby fac2.IdenFacturasBu ascending
+                                 select fac2.Fecharadicado).FirstOrDefault().Substring(0, 4) == anio
+                             && (from fac2 in _context.Set<FacturasBu>()
+                                 where fac2.Numefac == f.Numefac
+                                 orderby fac2.IdenFacturasBu ascending
+                                 select fac2.Fecharadicado).FirstOrDefault().Substring(5, 2) == mes
+                       select f.Sactfac).Sum();
+#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
+            return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
+        }
+
         //CARTERA TOTAL POR FACTURA
         [HttpGet("getCarteraTotal")]
         public ActionResult GetCarteraTotal()
