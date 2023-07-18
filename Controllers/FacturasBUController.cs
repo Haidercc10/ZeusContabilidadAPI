@@ -262,6 +262,38 @@ namespace ContabilidadZeusAPI.Controllers
             return Ok(con);
         }
 
+        // CARTERA MES A MES, AÑO A AÑO
+        [HttpGet("getCartera_Mes_Anio/{periodo}")]
+        public ActionResult GetCartera_Mes_Anio(string periodo)
+        {
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
+            var datos = new List<object>();
+            for (int i = 0; i < 12; i++)
+            {
+                string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
+                var con = (from f in _context.Set<FacturasBu>()
+                          where f.Sactfac > 0 &&
+                                f.Idvende != "" &&
+                                f.Anomesfac == $"{periodo}{mes}" &&
+                                f.IdenFacturasBu == (from f2 in _context.Set<FacturasBu>()
+                                                     where f2.Numefac == f.Numefac &&
+                                                           f2.Anomesfac == $"{periodo}{mes}"
+                                                     select f2.IdenFacturasBu).Max()
+                          group f by new { f.Anomesfac }
+                          into f
+                          select new
+                          {
+                              f.Key.Anomesfac,
+                              Mes = mes,
+                              Valor = f.Sum(x => x.Sactfac)
+                          }).FirstOrDefault();
+                datos.Add(con);
+                if (i == 11) return Ok(datos);
+            }
+            return Ok(datos);
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
+        }
+
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
