@@ -38,8 +38,13 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 builder.Services.AddScoped<ICacheService, CacheService>();
-builder.Services.AddDbContext<ContabilidadContext>(options =>
-{ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sqlServerOptionsAction: SqlOptions => { SqlOptions.EnableRetryOnFailure(); }); });
+builder.Services.AddDbContext<ContabilidadContext>(options => { 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        sqlServerOptionsAction: SqlOptions => { 
+            SqlOptions.EnableRetryOnFailure(); 
+        }); 
+});
+
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

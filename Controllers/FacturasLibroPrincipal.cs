@@ -35,9 +35,12 @@ namespace ContabilidadZeusAPI.Controllers
         public ActionResult GetFacturasProveedores(string cuenta)
         {
 #pragma warning disable CS0618 // El tipo o el miembro están obsoletos
+            var cuentas = new List<string>();
+            cuentas.Add("220505");
+            cuentas.Add("220510");
             var con = from F in _context.Set<FacturasLibroPrincipal>()
                       join P in _context.Set<Proveedore>() on F.Idcliprv equals P.Idprove
-                      where F.Codicta == cuenta &&
+                      where cuentas.Contains(F.Codicta) &&
                             F.Anomesfac == (from F2 in _context.Set<FacturasLibroPrincipal>()
                                             where F.Numefac == F2.Numefac
                                             select F2.Anomesfac).Max() &&
@@ -63,8 +66,11 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("getCostosProveedores_Mes_Mes/{anio}/{cuenta}")]
         public ActionResult GetCostosProveedores_Mes_Mes(string anio, string cuenta)
         {
+            var cuentas = new List<string>();
+            cuentas.Add("220505");
+            cuentas.Add("220510");
             var invergoal = from F in _context.Set<FacturasBuLibroPrincipal>()
-                            where F.Codicta == cuenta &&
+                            where cuentas.Contains(F.Codicta) &&
                                   F.Anomesfac.Contains(anio) && 
                                   F.Idcliprv == "900362200"
                             group F by new { F.Anomesfac }
@@ -77,7 +83,7 @@ namespace ContabilidadZeusAPI.Controllers
                             };
 
             var inversuez = from F in _context.Set<FacturasBuLibroPrincipal>()
-                            where F.Codicta == cuenta &&
+                            where cuentas.Contains(F.Codicta) &&
                                   F.Anomesfac.Contains(anio) &&
                                   F.Idcliprv == "900458314"
                             group F by new { F.Anomesfac }
@@ -90,7 +96,7 @@ namespace ContabilidadZeusAPI.Controllers
                             };
 
             var plasticaribe = from F in _context.Set<FacturasBuLibroPrincipal>()
-                               where F.Codicta == cuenta &&
+                               where cuentas.Contains(F.Codicta) &&
                                      F.Anomesfac.Contains(anio) &&
                                      F.Idcliprv != "900458314" &&
                                      F.Idcliprv != "900362200"
