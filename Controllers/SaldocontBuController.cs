@@ -49,6 +49,39 @@ namespace ContabilidadZeusAPI.Controllers
             return saldocontBu;
         }
 
+        //Consulta que devolverá los costos de las cuentas mes a mes
+        [HttpGet("getCostosCuentas_Mes_Mes/{anio}")]
+        public ActionResult GetCostosCuentas_Mes_Mes(string anio)
+        {
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
+            var datos = new List<object>();
+            for (int i = 0; i < 12; i++)
+            {
+                string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
+                var con = from cos in _context.Set<SaldocontBu>()
+                          join cun in _context.Set<CcmPlandeCuenta>() on cos.Codicta equals cun.Cuenta
+                          where cos.Anomescta == $"{anio}{mes}"
+                          group new { cos, cun } by new
+                          {
+                              Cuenta = cos.Codicta,
+                              cun.DescripcionCuenta,
+                              Periodo = cos.Anomescta,
+                          } into data
+                          select new
+                          {
+                              data.Key.Cuenta,
+                              data.Key.DescripcionCuenta,
+                              data.Key.Periodo,
+                              Valor = data.Sum(x => x.cos.Mvdbcta)
+                          };
+
+                datos.Add(con);
+                if (i == 11) return Ok(datos);
+            }
+            return Ok(datos);
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
+        }
+
         // PUT: api/SaldocontBu/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
