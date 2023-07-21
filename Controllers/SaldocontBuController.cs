@@ -60,7 +60,10 @@ namespace ContabilidadZeusAPI.Controllers
                 string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
                 var con = from cos in _context.Set<SaldocontBu>()
                           join cun in _context.Set<CcmPlandeCuenta>() on cos.Codicta equals cun.Cuenta
-                          where cos.Anomescta == $"{anio}{mes}"
+                          where cos.Anomescta == $"{anio}{mes}" &&
+                                cun.Cuenta.StartsWith("5") &&
+                                cun.Cuenta.StartsWith("7")
+                          orderby new { cos.Codicta, cos.Anomescta }
                           group new { cos, cun } by new
                           {
                               Cuenta = cos.Codicta,
