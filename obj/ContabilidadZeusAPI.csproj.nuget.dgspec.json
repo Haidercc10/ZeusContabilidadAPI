@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repositorio\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
+    "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
   },
   "projects": {
-    "C:\\Repositorio\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
+    "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repositorio\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectUniqueName": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "projectName": "ContabilidadZeusAPI",
-        "projectPath": "C:\\Repositorio\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
-        "packagesPath": "C:\\Users\\Desarrollo1\\.nuget\\packages\\",
-        "outputPath": "C:\\Repositorio\\ZeusContabilidadAPI\\obj\\",
+        "projectPath": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "packagesPath": "C:\\Users\\SANDRA\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SANDRA\\Documents\\GitHub\\ZeusContabilidadAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Desarrollo1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\SANDRA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +64,7 @@
             },
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.1.39, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -129,7 +130,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
