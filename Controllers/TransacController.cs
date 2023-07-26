@@ -25,10 +25,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transac>>> GetTransacs()
         {
-          if (_context.Transacs == null)
-          {
-              return NotFound();
-          }
+            if (_context.Transacs == null)
+            {
+                return NotFound();
+            }
             return await _context.Transacs.ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Transac>> GetTransac(int id)
         {
-          if (_context.Transacs == null)
-          {
-              return NotFound();
-          }
+            if (_context.Transacs == null)
+            {
+                return NotFound();
+            }
             var transac = await _context.Transacs.FindAsync(id);
 
             if (transac == null)
@@ -177,10 +177,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Transac>> PostTransac(Transac transac)
         {
-          if (_context.Transacs == null)
-          {
-              return Problem("Entity set 'ContabilidadContext.Transacs'  is null.");
-          }
+            if (_context.Transacs == null)
+            {
+                return Problem("Entity set 'ContabilidadContext.Transacs'  is null.");
+            }
             _context.Transacs.Add(transac);
             await _context.SaveChangesAsync();
 
