@@ -51,8 +51,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         // GET: api/Transac/5
-        [HttpGet("getCostosCuentasxMesDetallada/{anio}/{mes}/{cuenta}")]
-        public ActionResult GetCostosCuentasxMesDetallada(string anio, string mes, string cuenta)
+        [HttpGet("getCostosCuentasxMesDetallada/{anio}/{mes}")]
+        public ActionResult GetCostosCuentasxMesDetallada(string anio, string mes)
         {
             if (_context.Transacs == null) return NotFound();
 
@@ -64,7 +64,12 @@ namespace ContabilidadZeusAPI.Controllers
                           from ec in _context.Set<EscenariosCuenta>()
                           where tr.Idfuente == fu.Idfuente &&
                           tr.Codicta == ec.Id &&
-                          tr.Codicta == cuenta &&
+                          (tr.Codicta.StartsWith("51") ||
+                          tr.Codicta.StartsWith("52") ||
+                          tr.Codicta.StartsWith("53") ||
+                          tr.Codicta.StartsWith("72") ||
+                          tr.Codicta.StartsWith("73") ||
+                          tr.Codicta.StartsWith("74")) &&
                           tr.Statustra == "AC" &&
                           tr.Anotra == $"{anio}{mes}"
                           orderby tr.Codicta descending
