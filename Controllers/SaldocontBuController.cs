@@ -78,7 +78,9 @@ namespace ContabilidadZeusAPI.Controllers
                               data.Key.Periodo,
                               Mes = mes,
                               Anio = anio,
-                              Valor = data.Sum(x => x.cos.Mvdbcta),
+                              Debito = data.Sum(x => x.cos.Mvdbcta),
+                              Credito = data.Sum(x => x.cos.Mvcrcta),
+                              Valor = data.Sum(x => x.cos.Mvdbcta) - data.Sum(x => x.cos.Mvcrcta),
                           };
 
                 datos.Add(con);
