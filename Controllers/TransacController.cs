@@ -50,7 +50,7 @@ namespace ContabilidadZeusAPI.Controllers
             return transac;
         }
 
-
+        // GET: api/Transac/5
         [HttpGet("getCostosCuentasxMesDetallada/{anio}/{mes}/{cuenta}")]
         public ActionResult GetCostosCuentasxMesDetallada(string anio, string mes, string cuenta)
         {
@@ -92,7 +92,6 @@ namespace ContabilidadZeusAPI.Controllers
             if (transac == null) return BadRequest("No se encontraron registros de búsqueda!");
             return Ok(transac);
         }
-
 
         // PUT: api/Transac/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

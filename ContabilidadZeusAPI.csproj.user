@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>DBInventarioZeusAPI.Models.ContabilidadContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <NameOfLastUsedPublishProfile>C:\Repositorio\ZeusContabilidadAPI\Properties\PublishProfiles\FolderProfile3.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Repositorio\ZeusContabilidadAPI\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

@@ -66280,6 +66280,11 @@ namespace DBInventarioZeusAPI.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
+        internal object Set<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
