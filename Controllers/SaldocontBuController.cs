@@ -90,6 +90,57 @@ namespace ContabilidadZeusAPI.Controllers
 #pragma warning restore CS8604 // Posible argumento de referencia nulo
         }
 
+        //Consulta que devolverá los costos de las cuentas mes a mes
+        [HttpGet("getCostosCuentas_Mes_Mes_RangoFechas/{fechaInicio}/{fechaFin}")]
+        public ActionResult GetCostosCuentas_Mes_Mes_RangoFechas(DateTime fechaInicio, DateTime fechaFin)
+        {
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
+            int anioIncio = fechaInicio.Year;
+            string mesInicio = fechaInicio.Month.ToString().Length > 1 ? $"{fechaInicio.Month}" : $"0{fechaInicio.Month}";
+            int anioFin = fechaFin.Year;
+            string mesFin = fechaFin.Month.ToString().Length > 1 ? $"{fechaFin.Month}" : $"0{fechaFin.Month}";
+
+            var datos = new List<object>();
+            for (int i = 0; i < 12; i++)
+            {
+                string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
+                var con = from cos in _context.Set<SaldocontBu>()
+                          join cun in _context.Set<CcmPlandeCuenta>() on cos.Codicta equals cun.Cuenta
+                          where (cos.Anomescta == $"{anioIncio}{mes}" ||
+                                cos.Anomescta == $"{anioFin}{mes}") &&
+                                !cos.Anomescta.Trim().EndsWith("C") &&
+                                (cun.Cuenta.StartsWith("5") ||
+                                cun.Cuenta.StartsWith("7"))
+                          orderby cos.Codicta
+                          group new { cos, cun } by new
+                          {
+                              Cuenta = cos.Codicta,
+                              cun.DescripcionCuenta,
+                              Periodo = (cos.Anomescta).Trim(),
+                          } into data
+                          select new
+                          {
+                              data.Key.Cuenta,
+                              data.Key.DescripcionCuenta,
+                              data.Key.Periodo,
+                              Fecha1 = $"{anioIncio}{mesInicio}",
+                              Fecha2 = $"{anioFin}{mesFin}",
+                              Mes = mes,
+                              Anio = (data.Key.Periodo).Substring(0, 4),
+                              Debito = Convert.ToInt32(data.Key.Periodo) >= Convert.ToInt32($"{anioIncio}{mesInicio}") &&
+                                       Convert.ToInt32(data.Key.Periodo) <= Convert.ToInt32($"{anioFin}{mesFin}") ? data.Sum(x => x.cos.Mvdbcta) : 0,
+                              Credito = Convert.ToInt32(data.Key.Periodo) >= Convert.ToInt32($"{anioIncio}{mesInicio}") &&
+                                        Convert.ToInt32(data.Key.Periodo) <= Convert.ToInt32($"{anioFin}{mesFin}") ? data.Sum(x => x.cos.Mvcrcta) : 0,
+                              Valor = Convert.ToInt32(data.Key.Periodo) >= Convert.ToInt32($"{anioIncio}{mesInicio}") &&
+                                      Convert.ToInt32(data.Key.Periodo) <= Convert.ToInt32($"{anioFin}{mesFin}") ? data.Sum(x => x.cos.Mvdbcta) - data.Sum(x => x.cos.Mvcrcta) : 0,
+                          };
+                datos.Add(con);
+                if (i == 11) return Ok(datos);
+            }
+            return Ok(datos);
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
+        }
+
         // PUT: api/SaldocontBu/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
