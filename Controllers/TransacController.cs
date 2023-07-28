@@ -92,7 +92,7 @@ namespace ContabilidadZeusAPI.Controllers
                               Estado = tr.Statustra,
                               Origen_Mov = tr.IdOrigenMovimiento,
                               Id_Proveedor = tr.Nittra,
-                              Proveedor = tr.Nittra == "0" ? "N/A" : (from pr in _context.Set<Proveedore>() where pr.Idprove == tr.Nittra select pr.Razoncial).FirstOrDefault(),
+                              Proveedor = tr.Nittra == "0" ? "N/A" : (from pr in _context.Set<Tercero>() where pr.Idtercero == tr.Nittra select pr.Nombreter).FirstOrDefault(),
                           };
 
             if (transac == null) return BadRequest("No se encontraron registros de búsqueda!");
