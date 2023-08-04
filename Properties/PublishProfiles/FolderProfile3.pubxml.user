@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\inetpub\Contabilidad_WebAPI</_PublishTargetUrl>
-    <History>True|2023-07-28T19:57:27.4607810Z;True|2023-07-26T11:05:37.1953316-05:00;</History>
+    <History>True|2023-08-03T21:52:24.8396023Z;True|2023-07-28T14:57:27.4607810-05:00;True|2023-07-26T11:05:37.1953316-05:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

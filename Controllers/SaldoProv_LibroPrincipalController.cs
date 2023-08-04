@@ -33,12 +33,16 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("getCostosProveedores/{cuenta}")]
         public ActionResult GetCostosProveedores(string cuenta)
         {
+            var cuentas = new List<string>();
+            cuentas.Add("220505");
+            cuentas.Add("220510");
+
             var con = from S in _context.Set<SaldoProvLibroPrincipal>()
                       join P in _context.Set<Proveedore>() on S.Idprove equals P.Idprove
                       where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>()
                                             where S2.Idprove == S.Idprove
                                             select S2.Anomescta).Max() &&
-                            S.Codicta == cuenta &&
+                            cuentas.Contains(S.Codicta) &&
                             S.Sdaccta != 0
                       group new { S,P } by new
                       {
@@ -64,12 +68,15 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("getCostosTotalProveedores/{cuenta}")]
         public ActionResult GetCostosTotalProveedores(string cuenta)
         {
+            var cuentas = new List<string>();
+            cuentas.Add("220505");
+            cuentas.Add("220510");
             var con = (from S in _context.Set<SaldoProvLibroPrincipal>()
                       join P in _context.Set<Proveedore>() on S.Idprove equals P.Idprove
                       where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>()
                                             where S2.Idprove == S.Idprove
                                             select S2.Anomescta).Max() &&
-                            S.Codicta == cuenta &&
+                            cuentas.Contains(S.Codicta) &&
                             S.Sdaccta != 0 &&
                             P.Idprove != (900458314).ToString() &&
                             P.Idprove != (900362200).ToString()
