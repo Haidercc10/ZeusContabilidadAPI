@@ -31,8 +31,8 @@ namespace ContabilidadZeusAPI.Controllers
             return await _context.FacturasLibroPrincipals.ToListAsync();
         }
 
-        [HttpGet("getFacturasProveedores/{cuenta}")]
-        public ActionResult GetFacturasProveedores(string cuenta)
+        [HttpGet("getFacturasProveedores2/{cuenta}")]
+        public ActionResult GetFacturasProveedores2(string cuenta)
         {
 #pragma warning disable CS0618 // El tipo o el miembro están obsoletos
             var cuentas = new List<string>();
@@ -57,6 +57,49 @@ namespace ContabilidadZeusAPI.Controllers
                           Saldo_Actual = F.Sactfac,
                           Mora = 0,
                           Cuenta = F.Codicta,
+                      };
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
+            return Ok(con);
+        }
+
+        [HttpGet("getFacturasProveedores/{cuenta}")]
+        public ActionResult GetFacturasProveedores(string cuenta)
+        {
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
+            var cuentas = new List<string>();
+            cuentas.Add("220505");
+            cuentas.Add("220510");
+            var con = from F in _context.Set<FacturasLibroPrincipal>()
+                      join P in _context.Set<Proveedore>() on F.Idcliprv equals P.Idprove
+                      group new {F, P} by new
+                      {
+                          P.Idprove,
+                          P.Razoncial,
+                          F.Numefac,
+                          F.Anomesfac,
+                          F.Codicta,
+                      } into F
+                      where cuentas.Contains(F.Key.Codicta) &&
+                            F.Key.Anomesfac == (from F2 in _context.Set<FacturasLibroPrincipal>()
+                                                where F.Key.Numefac == F2.Numefac
+                                                select F2.Anomesfac).Max() &&
+                            F.Sum(x => x.F.Sactfac) != 0
+                      orderby F.Key.Idprove ascending, F.Key.Numefac ascending
+                      select new
+                      {
+                          Id_Proveedor = F.Key.Idprove,
+                          Proveedor = F.Key.Razoncial,
+                          Factura = F.Key.Numefac,
+                          Fecha_Factura = (from F2 in _context.Set<FacturasLibroPrincipal>()
+                                           where F.Key.Numefac == F2.Numefac
+                                           select F2.Fechfac).Max(),
+                          Fecha_Vencimiento = (from F2 in _context.Set<FacturasLibroPrincipal>()
+                                               where F.Key.Numefac == F2.Numefac
+                                               select F2.Vencfac).Max(),
+                          Periodo = F.Key.Anomesfac,
+                          Saldo_Actual = F.Sum(x => x.F.Sactfac),
+                          Mora = 0,
+                          Cuenta = F.Key.Codicta,
                       };
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
             return Ok(con);
