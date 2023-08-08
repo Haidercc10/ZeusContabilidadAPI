@@ -159,7 +159,16 @@ namespace ContabilidadZeusAPI.Controllers
                             cuentas22.Contains(T1.Codicta) &&
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
-                            !invergoal_inversuez.Contains(T1.Nittra)
+                            !invergoal_inversuez.Contains(T1.Nittra) &&
+                            T2.Numdoctra == (from T3 in _context.Set<Transac>()
+                                              join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
+                                              where T3.Idfuente == "EA" &&
+                                                    cuentas22.Contains(T3.Codicta) &&
+                                                    cuentas14.Contains(T4.Codicta) &&
+                                                    T3.Anotra.StartsWith(anio) &&
+                                                    !invergoal_inversuez.Contains(T3.Nittra) &&
+                                                    T3.Numefac == T1.Numefac
+                                              select T4.Numdoctra).Max()
                       group new { T1, T2, P } by new
                       {
                           Periodo = T1.Anotra,
@@ -210,7 +219,7 @@ namespace ContabilidadZeusAPI.Controllers
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
                             !invergoal_inversuez.Contains(T1.Nittra) &&
-                            T2.Consecutra == (from T3 in _context.Set<Transac>()
+                            T2.Numdoctra == (from T3 in _context.Set<Transac>()
                                               join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
                                               where T3.Idfuente == "EA" &&
                                                     cuentas22.Contains(T3.Codicta) &&
@@ -218,7 +227,7 @@ namespace ContabilidadZeusAPI.Controllers
                                                     T3.Anotra.StartsWith(anio) &&
                                                     !invergoal_inversuez.Contains(T3.Nittra) && 
                                                     T3.Numefac == T1.Numefac
-                                              select T4.Consecutra).Max()
+                                              select T4.Numdoctra).Max()
                       group new { T1, T2, P } by new
                       {
                           Periodo = T1.Anotra,
@@ -228,6 +237,8 @@ namespace ContabilidadZeusAPI.Controllers
                           Id_Proveedor = P.Idprove,
                           Proveedor = P.Razoncial,
                           Factura = T1.Numefac,
+                          Fecha_Factura = T1.Fechafact,
+                          Fecha_Vencimiento = T1.Vencefac,
                           Valor1 = T1.Valortra
                       } into T
                       where T.Sum(x => x.T2.Valortra) > 0
@@ -239,6 +250,8 @@ namespace ContabilidadZeusAPI.Controllers
                           T.Key.Id_Proveedor,
                           T.Key.Proveedor,
                           T.Key.Factura,
+                          T.Key.Fecha_Factura,
+                          T.Key.Fecha_Vencimiento,
                           Costo = T.Sum(x => x.T2.Valortra)
                       };
 #pragma warning restore CS8604 // Posible argumento de referencia nulo
