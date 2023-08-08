@@ -100,8 +100,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         //CONSULTA QUE DEVOLVERÁ EL TOTAL DE COSTO DE LAS COMPRAS EN CADA MES EN UN AÑO QUE LE SEA PASADO
-        [HttpPost("getCostos_Compras_Mes_Mes/{anio}")]
-        public IActionResult GetCostos_Compras_Mes_Mes([FromBody] List<string> facturas, string anio)
+        [HttpPost("getCostos_Compras_Mes_Mes/{anio}/{inver}")]
+        public IActionResult GetCostos_Compras_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
             var cuentas14 = new List<string>();
@@ -116,7 +116,7 @@ namespace ContabilidadZeusAPI.Controllers
                       where cuentas14.Contains(T1.Codicta) &&
                             T1.Idfuente == "EA" &&
                             T1.Anotra.StartsWith(anio) &&
-                            !invergoal_inversuez.Contains(T1.Nittra) &&
+                            (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
                             (from T2 in _context.Set<Transac>()
                              where !facturas.Contains(T2.Numefac)
                              select T2.Numdoctra).Contains(T1.Numdoctra)
@@ -135,8 +135,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         //CONSULTA QUE VA A DEVOLVER LOS COSTOS DE LAS COMPRAS AGRUPADOS POR PROVEEDOR, AÑO Y MES
-        [HttpPost("getCostos_Compras_Proveedores_Mes_Mes/{anio}")]
-        public ActionResult GetCostos_Compras_Proveedores_Mes_Mes([FromBody] List<string> facturas, string anio)
+        [HttpPost("getCostos_Compras_Proveedores_Mes_Mes/{anio}/{inver}")]
+        public ActionResult GetCostos_Compras_Proveedores_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
             var cuentas14 = new List<string>();
             cuentas14.Add("140505");
@@ -159,14 +159,14 @@ namespace ContabilidadZeusAPI.Controllers
                             cuentas22.Contains(T1.Codicta) &&
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
-                            !invergoal_inversuez.Contains(T1.Nittra) &&
+                            (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
                             T2.Numdoctra == (from T3 in _context.Set<Transac>()
                                               join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
                                               where T3.Idfuente == "EA" &&
                                                     cuentas22.Contains(T3.Codicta) &&
                                                     cuentas14.Contains(T4.Codicta) &&
                                                     T3.Anotra.StartsWith(anio) &&
-                                                    !invergoal_inversuez.Contains(T3.Nittra) &&
+                                                    (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
                                                     T3.Numefac == T1.Numefac
                                               select T4.Numdoctra).Max()
                       group new { T1, T2, P } by new
@@ -194,8 +194,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         //CONSULTA QUE VA A DEVOLVER LOS COSTOS DE LAS COMPRAS AGRUPADOS POR FACTURA, AÑO Y MES
-        [HttpPost("getCostos_Compras_Facturas_Mes_Mes/{anio}")]
-        public ActionResult GetCostos_Compras_Facturas_Mes_Mes([FromBody] List<string> facturas, string anio)
+        [HttpPost("getCostos_Compras_Facturas_Mes_Mes/{anio}/{inver}")]
+        public ActionResult GetCostos_Compras_Facturas_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
             var cuentas14 = new List<string>();
             cuentas14.Add("140505");
@@ -218,14 +218,14 @@ namespace ContabilidadZeusAPI.Controllers
                             cuentas22.Contains(T1.Codicta) &&
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
-                            !invergoal_inversuez.Contains(T1.Nittra) &&
+                            (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
                             T2.Numdoctra == (from T3 in _context.Set<Transac>()
                                               join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
                                               where T3.Idfuente == "EA" &&
                                                     cuentas22.Contains(T3.Codicta) &&
                                                     cuentas14.Contains(T4.Codicta) &&
                                                     T3.Anotra.StartsWith(anio) &&
-                                                    !invergoal_inversuez.Contains(T3.Nittra) && 
+                                                    (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
                                                     T3.Numefac == T1.Numefac
                                               select T4.Numdoctra).Max()
                       group new { T1, T2, P } by new
