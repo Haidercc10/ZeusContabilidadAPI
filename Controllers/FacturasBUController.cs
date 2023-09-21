@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using DBInventarioZeusAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DBInventarioZeusAPI.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ContabilidadZeusAPI.Controllers
 {
@@ -52,16 +47,16 @@ namespace ContabilidadZeusAPI.Controllers
 
         // CARTERA TOTAL
         [HttpGet("getCartera")]
-        public ActionResult GetCartera()
+        public ActionResult GetCartera(string? vendedor = "", string? cliente = "")
         {
             var con = (from f in _context.Set<FacturasBu>()
-                       from c in _context.Set<Cliente>()
-                       from v in _context.Set<Maevende>()
+                       join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
+                       join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
                        join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
                        where f.Sactfac > 0
-                             && c.Idcliente == f.Idcliprv
-                             && v.Idvende == f.Idvende
-                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu                      
+                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
+                             && (cliente != "" ? c.Razoncial == cliente : c.Razoncial.Contains(cliente))
                        select f.Sactfac).Sum();
             return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
         }
@@ -94,16 +89,18 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CARTERA TOTAL POR FACTURA
         [HttpGet("getCarteraTotal")]
-        public ActionResult GetCarteraTotal()
+        public ActionResult GetCarteraTotal(string? vendedor = "", string? cliente = "")
         {
             var con = from cli in _context.Set<Cliente>()
-                      from vendedor in _context.Set<Maevende>()
+                      from vende in _context.Set<Maevende>()
                       from fac in _context.Set<FacturasBu>()
                       join subFac in _context.Set<FacturasBu>() on fac.Numefac equals subFac.Numefac into details
                       where fac.Sactfac > 0
                             && cli.Idcliente == fac.Idcliprv
-                            && vendedor.Idvende == fac.Idvende
+                            && vende.Idvende == fac.Idvende
                             && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
+                            && (vendedor != "" ? vende.Nombvende == vendedor : vende.Nombvende.Contains(vendedor))
+                            && (cliente != "" ? cli.Razoncial == cliente : cli.Razoncial.Contains(cliente))
                       orderby fac.Numefac ascending
                       select new
                       {
@@ -115,7 +112,7 @@ namespace ContabilidadZeusAPI.Controllers
                                       select fac2.Fecharadicado).FirstOrDefault(),
                           LAPSO_DOC = fac.Fechfac,
                           Fecha_Vencimiento = fac.Vencfac,
-                          Nombre_Vendedor = vendedor.Nombvende,
+                          Nombre_Vendedor = vende.Nombvende,
                           Id_Vendedor = fac.Idvende,
                           Tipo_Movimiento = "FV",
                           Saldo_Cartera = fac.Sactfac,
@@ -174,13 +171,11 @@ namespace ContabilidadZeusAPI.Controllers
         public ActionResult GetCarteraClientes(string cliente)
         {
             var con = from cli in _context.Set<Cliente>()
-                      from vendedor in _context.Set<Maevende>()
-                      from fac in _context.Set<FacturasBu>()
+                      join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
+                      join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
                       join subFac in _context.Set<FacturasBu>() on fac.Numefac equals subFac.Numefac into details
                       where fac.Sactfac > 0
-                            && cli.Idcliente == fac.Idcliprv
                             && fac.Idcliprv == cliente
-                            && vendedor.Idvende == fac.Idvende
                             && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
                       orderby fac.Numefac ascending
                       select new
@@ -191,7 +186,7 @@ namespace ContabilidadZeusAPI.Controllers
                                       where fac2.Numefac == fac.Numefac
                                       orderby fac2.IdenFacturasBu ascending
                                       select fac2.Fecharadicado).FirstOrDefault(),
-                          LAPSO_DOC = fac.Fechfac,
+                          LAPSO_DOC = Convert.ToDateTime(fac.Fechfac),
                           Fecha_Vencimiento = fac.Vencfac,
                           Nombre_Vendedor = vendedor.Nombvende,
                           Id_Vendedor = fac.Idvende,
@@ -210,16 +205,16 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CARTERA POR AGRUPADA POR CLIENTES
         [HttpGet("getCarteraAgrupadaClientes")]
-        public ActionResult GetCarteraAgrupadaClientes()
+        public ActionResult GetCarteraAgrupadaClientes(string? vendedor = "", string? cliente = "")
         {
             var con = from f in _context.Set<FacturasBu>()
-                      from c in _context.Set<Cliente>()
-                      from v in _context.Set<Maevende>()
+                      join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
+                      join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
                       where f.Sactfac > 0
-                            && c.Idcliente == f.Idcliprv
-                            && v.Idvende == f.Idvende
                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                            && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
+                            && (cliente != "" ? c.Razoncial == cliente : c.Razoncial.Contains(cliente))
                       group new { f, c, v } by new
                       {
                           c.Idcliente,
@@ -240,14 +235,14 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CARTERA POR AGRUPADA POR VENDEDORES
         [HttpGet("getCarteraAgrupadaVendedores")]
-        public ActionResult GetCarteraAgrupadaVendedores()
+        public ActionResult GetCarteraAgrupadaVendedores(string? vendedor = "")
         {
             var con = from f in _context.Set<FacturasBu>()
-                      from v in _context.Set<Maevende>()
+                      join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
                       where f.Sactfac > 0
-                            && v.Idvende == f.Idvende
                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                            && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
                       group new { f, v } by new
                       {
                           v.Nombvende,
@@ -272,21 +267,21 @@ namespace ContabilidadZeusAPI.Controllers
             {
                 string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
                 var con = (from f in _context.Set<FacturasBu>()
-                          where f.Sactfac > 0 &&
-                                f.Idvende != "" &&
-                                f.Anomesfac == $"{periodo}{mes}" &&
-                                f.IdenFacturasBu == (from f2 in _context.Set<FacturasBu>()
-                                                     where f2.Numefac == f.Numefac &&
-                                                           f2.Anomesfac == $"{periodo}{mes}"
-                                                     select f2.IdenFacturasBu).Max()
-                          group f by new { f.Anomesfac }
+                           where f.Sactfac > 0 &&
+                                 f.Idvende != "" &&
+                                 f.Anomesfac == $"{periodo}{mes}" &&
+                                 f.IdenFacturasBu == (from f2 in _context.Set<FacturasBu>()
+                                                      where f2.Numefac == f.Numefac &&
+                                                            f2.Anomesfac == $"{periodo}{mes}"
+                                                      select f2.IdenFacturasBu).Max()
+                           group f by new { f.Anomesfac }
                           into f
-                          select new
-                          {
-                              f.Key.Anomesfac,
-                              Mes = mes,
-                              Valor = f.Sum(x => x.Sactfac)
-                          }).FirstOrDefault();
+                           select new
+                           {
+                               f.Key.Anomesfac,
+                               Mes = mes,
+                               Valor = f.Sum(x => x.Sactfac)
+                           }).FirstOrDefault();
                 datos.Add(con);
                 if (i == 11) return Ok(datos);
             }

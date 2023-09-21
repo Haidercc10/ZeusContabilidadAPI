@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sistemas\\Source\\Repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
+    "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sistemas\\Source\\Repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
+    "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sistemas\\Source\\Repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "projectName": "ContabilidadZeusAPI",
-        "projectPath": "C:\\Users\\Sistemas\\Source\\Repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectPath": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "packagesPath": "C:\\Users\\Sistemas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sistemas\\Source\\Repos\\Haidercc10\\ZeusContabilidadAPI\\obj\\",
+        "outputPath": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -58,43 +58,43 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.1.39, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.9, )"
+              "version": "[7.0.11, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.10, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -128,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

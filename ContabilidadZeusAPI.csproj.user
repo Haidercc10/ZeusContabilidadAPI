@@ -10,6 +10,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>DBInventarioZeusAPI.Models.ContabilidadContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\Sistemas\Source\Repos\Haidercc10\ZeusContabilidadAPI\Properties\PublishProfiles\API_Local.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\Sistemas\Documents\GitHub\ZeusContabilidadAPI\Properties\PublishProfiles\Servidor.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
