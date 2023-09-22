@@ -230,7 +230,7 @@ namespace ContabilidadZeusAPI.Controllers
                           f.Key.Idvende,
                           SubTotal = f.Sum(x => x.f.Sactfac)
                       };
-            return con.Count() > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
+            return Ok(con);
         }
 
         //CARTERA POR AGRUPADA POR VENDEDORES

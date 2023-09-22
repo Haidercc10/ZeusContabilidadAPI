@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using DBInventarioZeusAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DBInventarioZeusAPI.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ContabilidadZeusAPI.Controllers
 {
@@ -25,10 +20,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-          if (_context.Clientes == null)
-          {
-              return NotFound();
-          }
+            if (_context.Clientes == null)
+            {
+                return NotFound();
+            }
             return await _context.Clientes.ToListAsync();
         }
 
@@ -36,10 +31,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(string id)
         {
-          if (_context.Clientes == null)
-          {
-              return NotFound();
-          }
+            if (_context.Clientes == null)
+            {
+                return NotFound();
+            }
             var cliente = await _context.Clientes.FindAsync(id);
 
             if (cliente == null)
@@ -48,6 +43,18 @@ namespace ContabilidadZeusAPI.Controllers
             }
 
             return cliente;
+        }
+
+        [HttpGet("getClientes")]
+        public ActionResult Get()
+        {
+            var clietes = from cli in _context.Set<Cliente>()
+                          select new
+                          {
+                              cli.Idcliente,
+                              cli.Razoncial
+                          };
+            return Ok(clietes);
         }
 
         // PUT: api/Clientes/5
@@ -86,10 +93,10 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
-          if (_context.Clientes == null)
-          {
-              return Problem("Entity set 'ContabilidadContext.Clientes'  is null.");
-          }
+            if (_context.Clientes == null)
+            {
+                return Problem("Entity set 'ContabilidadContext.Clientes'  is null.");
+            }
             _context.Clientes.Add(cliente);
             try
             {
