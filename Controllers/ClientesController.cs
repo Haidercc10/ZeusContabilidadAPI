@@ -52,9 +52,23 @@ namespace ContabilidadZeusAPI.Controllers
                           select new
                           {
                               cli.Idcliente,
-                              cli.Razoncial
+                              cli.Razoncial,
+                              cli.Idvende,
                           };
             return Ok(clietes);
+        }
+
+        [HttpGet("getClientes_Vendedor/{vendedor}")]
+        public ActionResult GetClientes_Vendedor(string vendedor)
+        {
+            var clientes = from cli in _context.Set<Cliente>()
+                           where cli.Idvende == vendedor
+                           select new
+                           {
+                               cli.Idcliente,
+                               cli.Razoncial
+                           };
+            return Ok(clientes);
         }
 
         // PUT: api/Clientes/5
