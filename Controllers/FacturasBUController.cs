@@ -91,6 +91,8 @@ namespace ContabilidadZeusAPI.Controllers
         [HttpGet("getCarteraTotal")]
         public ActionResult GetCarteraTotal(string? vendedor = "", string? cliente = "")
         {
+            var hoy = DateTime.Now;
+
             var con = from cli in _context.Set<Cliente>()
                       from vende in _context.Set<Maevende>()
                       from fac in _context.Set<FacturasBu>()
@@ -123,6 +125,13 @@ namespace ContabilidadZeusAPI.Controllers
                           Id_Cliente = fac.Idcliprv,
                           Ciudad_Cliente = cli.Ciudad,
                           Plazo_De_Pago = cli.Diplazo,
+                          Fecha_Actual = hoy.ToString("yyyy/MM/dd"),
+                          Cantidad_Dias = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays, 
+                          SaldoPlazo1 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays >= 1 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays <= 30 ? fac.Sactfac : -1,
+                          SaldoPlazo2 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays >= 31 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays <= 60 ? fac.Sactfac : -1,
+                          SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays <= 90 ? fac.Sactfac : -1,
+                          SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays <= 120 ? fac.Sactfac : -1,
+                          SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).TotalDays > 120 ? fac.Sactfac : -1,
                       };
             return Ok(con);
         }
