@@ -1,7 +1,10 @@
 ﻿using DBInventarioZeusAPI.Models;
+using Intercom.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using static Grpc.Core.Metadata;
 
 namespace ContabilidadZeusAPI.Controllers
 {
@@ -45,22 +48,6 @@ namespace ContabilidadZeusAPI.Controllers
             return cliente;
         }
 
-        // CARTERA TOTAL
-        [HttpGet("getCartera")]
-        public ActionResult GetCartera(string? vendedor = "", string? cliente = "")
-        {
-            var con = (from f in _context.Set<FacturasBu>()
-                       join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
-                       join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
-                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
-                       where f.Sactfac > 0
-                             && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
-                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
-                             && (cliente != "" ? c.Razoncial == cliente : c.Razoncial.Contains(cliente))
-                       select f.Sactfac).Sum();
-            return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
-        }
-
         // CARTERA POR AÑO Y MES
         [HttpGet("getCartera_Anio_Mes/{anio}/{mes}")]
         public ActionResult GetCartera_Anio_Mes(string anio, string mes)
@@ -96,11 +83,10 @@ namespace ContabilidadZeusAPI.Controllers
             var con = from cli in _context.Set<Cliente>()
                       from vende in _context.Set<Maevende>()
                       from fac in _context.Set<FacturasBu>()
-                      join subFac in _context.Set<FacturasBu>() on fac.Numefac equals subFac.Numefac into details
                       where fac.Sactfac > 0
                             && cli.Idcliente == fac.Idcliprv
                             && vende.Idvende == fac.Idvende
-                            && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? vende.Nombvende == vendedor : vende.Nombvende.Contains(vendedor))
                             && (cliente != "" ? cli.Razoncial == cliente : cli.Razoncial.Contains(cliente))
                       orderby fac.Numefac ascending
@@ -117,7 +103,7 @@ namespace ContabilidadZeusAPI.Controllers
                           Nombre_Vendedor = vende.Nombvende,
                           Id_Vendedor = fac.Idvende,
                           Tipo_Movimiento = "FV",
-                          Saldo_Cartera = fac.Sactfac,
+                          Saldo_Cartera = fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum(),
                           Fecha_Radicado = fac.Fecharadicado,
                           TipoCliente = "05",
                           Direccion_Cliente = cli.Direccion,
@@ -127,11 +113,11 @@ namespace ContabilidadZeusAPI.Controllers
                           Plazo_De_Pago = cli.Diplazo,
                           Fecha_Actual = hoy.ToString("yyyy/MM/dd"),
                           Cantidad_Dias = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")).Subtract(Convert.ToDateTime(fac.Fechfac))).TotalDays, 
-                          SaldoPlazo1 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 1 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 30 ? fac.Sactfac : -1,
-                          SaldoPlazo2 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 31 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 60 ? fac.Sactfac : -1,
-                          SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 90 ? fac.Sactfac : -1,
-                          SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 120 ? fac.Sactfac : -1,
-                          SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days > 120 ? fac.Sactfac : -1
+                          SaldoPlazo1 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 1 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 30 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo2 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 31 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 60 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 90 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days > 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1
                       };
             return Ok(con);
         }
@@ -141,14 +127,11 @@ namespace ContabilidadZeusAPI.Controllers
         public ActionResult GetCarteraVendedor(string id)
         {
             var con = from cli in _context.Set<Cliente>()
-                      from vendedor in _context.Set<Maevende>()
-                      from fac in _context.Set<FacturasBu>()
-                      join subFac in _context.Set<FacturasBu>() on fac.Numefac equals subFac.Numefac into details
+                      join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
+                      join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
                       where fac.Sactfac > 0
-                            && cli.Idcliente == fac.Idcliprv
-                            && vendedor.Idvende == fac.Idvende
-                            && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
                             && fac.Idvende == id
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                       orderby fac.Numefac ascending
                       select new
                       {
@@ -182,10 +165,9 @@ namespace ContabilidadZeusAPI.Controllers
             var con = from cli in _context.Set<Cliente>()
                       join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
                       join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
-                      join subFac in _context.Set<FacturasBu>() on fac.Numefac equals subFac.Numefac into details
                       where fac.Sactfac > 0
                             && fac.Idcliprv == cliente
-                            && details.Max(x => x.IdenFacturasBu) == fac.IdenFacturasBu
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                       orderby fac.Numefac ascending
                       select new
                       {
@@ -219,9 +201,8 @@ namespace ContabilidadZeusAPI.Controllers
             var con = from f in _context.Set<FacturasBu>()
                       join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
                       join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
-                      join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
                       where f.Sactfac > 0
-                            && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                            && f.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
                             && (cliente != "" ? c.Razoncial == cliente : c.Razoncial.Contains(cliente))
                       group new { f, c, v } by new
@@ -229,7 +210,8 @@ namespace ContabilidadZeusAPI.Controllers
                           c.Idcliente,
                           c.Razoncial,
                           v.Nombvende,
-                          f.Idvende
+                          f.Idvende, 
+                          f.Anomesfac
                       } into f
                       select new
                       {
@@ -248,14 +230,14 @@ namespace ContabilidadZeusAPI.Controllers
         {
             var con = from f in _context.Set<FacturasBu>()
                       join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
-                      join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
                       where f.Sactfac > 0
-                            && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
+                            && f.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
                       group new { f, v } by new
                       {
                           v.Nombvende,
-                          v.Idvende
+                          v.Idvende, 
+                          f.Anomesfac
                       } into f
                       select new
                       {
