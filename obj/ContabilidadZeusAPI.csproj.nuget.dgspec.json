@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
+    "C:\\Users\\Sistemas\\source\\repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
+    "C:\\Users\\Sistemas\\source\\repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Sistemas\\source\\repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "projectName": "ContabilidadZeusAPI",
-        "projectPath": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectPath": "C:\\Users\\Sistemas\\source\\repos\\Haidercc10\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "packagesPath": "C:\\Users\\Sistemas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sistemas\\Documents\\GitHub\\ZeusContabilidadAPI\\obj\\",
+        "outputPath": "C:\\Users\\Sistemas\\source\\repos\\Haidercc10\\ZeusContabilidadAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -128,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
