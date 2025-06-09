@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "R99hzTk0db/7S0pYdqWwGXZuucaiF8L70F1JdmWLWD4=",
+  "Hash": "hqsfBYM1PV7Dehveha3L4/vfavQjhYQOcSlNIzvTe3U=",
   "Source": "ContabilidadZeusAPI",
   "BasePath": "_content/ContabilidadZeusAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

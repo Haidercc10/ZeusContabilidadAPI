@@ -1,0 +1,1003 @@
+[
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.AuthenticationController",
+    "Method": "Login",
+    "RelativePath": "api/Authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ContabilidadZeusAPI.Service.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "GetClientes",
+    "RelativePath": "api/Clientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.Cliente, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "PostCliente",
+    "RelativePath": "api/Clientes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cliente",
+        "Type": "DBInventarioZeusAPI.Models.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Cliente",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "GetCliente",
+    "RelativePath": "api/Clientes/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Cliente",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "PutCliente",
+    "RelativePath": "api/Clientes/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "cliente",
+        "Type": "DBInventarioZeusAPI.Models.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "DeleteCliente",
+    "RelativePath": "api/Clientes/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "Get",
+    "RelativePath": "api/Clientes/getClientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.ClientesController",
+    "Method": "GetClientes_Vendedor",
+    "RelativePath": "api/Clientes/getClientes_Vendedor/{vendedor}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendedor",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetFacturasBu",
+    "RelativePath": "api/FacturasBU",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.FacturasBu, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "PostCliente",
+    "RelativePath": "api/FacturasBU",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FacturasBu",
+        "Type": "DBInventarioZeusAPI.Models.FacturasBu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.FacturasBu",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetFacturasBu",
+    "RelativePath": "api/FacturasBU/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.FacturasBu",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "PutCliente",
+    "RelativePath": "api/FacturasBU/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "FacturasBu",
+        "Type": "DBInventarioZeusAPI.Models.FacturasBu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "DeleteCliente",
+    "RelativePath": "api/FacturasBU/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCartera_Anio_Mes",
+    "RelativePath": "api/FacturasBU/getCartera_Anio_Mes/{anio}/{mes}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "mes",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCartera_Mes_Anio",
+    "RelativePath": "api/FacturasBU/getCartera_Mes_Anio/{periodo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "periodo",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCarteraAgrupadaClientes",
+    "RelativePath": "api/FacturasBU/getCarteraAgrupadaClientes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientes",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "vendedor",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCarteraAgrupadaVendedores",
+    "RelativePath": "api/FacturasBU/getCarteraAgrupadaVendedores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendedor",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCarteraClientes",
+    "RelativePath": "api/FacturasBU/getCarteraClientes/{cliente}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cliente",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCarteraTotal",
+    "RelativePath": "api/FacturasBU/getCarteraTotal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendedor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "cliente",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "GetCarteraVendedor",
+    "RelativePath": "api/FacturasBU/getCarteraVendedor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasLibroPrincipalController",
+    "Method": "GetFacturasBu",
+    "RelativePath": "api/FacturasLibroPrincipal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.FacturasLibroPrincipal, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasLibroPrincipalController",
+    "Method": "GetCostosProveedores_Mes_Mes",
+    "RelativePath": "api/FacturasLibroPrincipal/getCostosProveedores_Mes_Mes/{anio}/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasLibroPrincipalController",
+    "Method": "GetFacturasProveedores",
+    "RelativePath": "api/FacturasLibroPrincipal/getFacturasProveedores/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasLibroPrincipalController",
+    "Method": "GetFacturasProveedores2",
+    "RelativePath": "api/FacturasLibroPrincipal/getFacturasProveedores2/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "GetSaldocontBus",
+    "RelativePath": "api/SaldocontBu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.SaldocontBu, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "PostSaldocontBu",
+    "RelativePath": "api/SaldocontBu",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "saldocontBu",
+        "Type": "DBInventarioZeusAPI.Models.SaldocontBu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.SaldocontBu",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "GetSaldocontBu",
+    "RelativePath": "api/SaldocontBu/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.SaldocontBu",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "PutSaldocontBu",
+    "RelativePath": "api/SaldocontBu/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "saldocontBu",
+        "Type": "DBInventarioZeusAPI.Models.SaldocontBu",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "DeleteSaldocontBu",
+    "RelativePath": "api/SaldocontBu/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "GetCostosCuentas_Mes_Mes_RangoFechas",
+    "RelativePath": "api/SaldocontBu/getCostosCuentas_Mes_Mes_RangoFechas/{fechaInicio}/{fechaFin}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fechaInicio",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldocontBuController",
+    "Method": "GetCostosCuentas_Mes_Mes",
+    "RelativePath": "api/SaldocontBu/getCostosCuentas_Mes_Mes/{anio}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldoProv_LibroPrincipalController",
+    "Method": "GetFacturasBu",
+    "RelativePath": "api/SaldoProv_LibroPrincipal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.SaldoProvLibroPrincipal, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldoProv_LibroPrincipalController",
+    "Method": "GetCostosProveedores",
+    "RelativePath": "api/SaldoProv_LibroPrincipal/getCostosProveedores/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.SaldoProv_LibroPrincipalController",
+    "Method": "GetCostosTotalProveedores",
+    "RelativePath": "api/SaldoProv_LibroPrincipal/getCostosTotalProveedores/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TercerosController",
+    "Method": "GetTerceros",
+    "RelativePath": "api/Terceros",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.Tercero, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TercerosController",
+    "Method": "PostTercero",
+    "RelativePath": "api/Terceros",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tercero",
+        "Type": "DBInventarioZeusAPI.Models.Tercero",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Tercero",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TercerosController",
+    "Method": "GetTercero",
+    "RelativePath": "api/Terceros/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Tercero",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TercerosController",
+    "Method": "PutTercero",
+    "RelativePath": "api/Terceros/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "tercero",
+        "Type": "DBInventarioZeusAPI.Models.Tercero",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TercerosController",
+    "Method": "DeleteTercero",
+    "RelativePath": "api/Terceros/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetTransacs",
+    "RelativePath": "api/Transac",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.Models.Transac, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "PostTransac",
+    "RelativePath": "api/Transac",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transac",
+        "Type": "DBInventarioZeusAPI.Models.Transac",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Transac",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetTransac",
+    "RelativePath": "api/Transac/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DBInventarioZeusAPI.Models.Transac",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "PutTransac",
+    "RelativePath": "api/Transac/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "transac",
+        "Type": "DBInventarioZeusAPI.Models.Transac",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "DeleteTransac",
+    "RelativePath": "api/Transac/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetCostos_Compras_Facturas_Mes_Mes",
+    "RelativePath": "api/Transac/getCostos_Compras_Facturas_Mes_Mes/{anio}/{inver}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facturas",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "inver",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetCostos_Compras_Mes_Mes",
+    "RelativePath": "api/Transac/getCostos_Compras_Mes_Mes/{anio}/{inver}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facturas",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "inver",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetCostos_Compras_Proveedores_Mes_Mes",
+    "RelativePath": "api/Transac/getCostos_Compras_Proveedores_Mes_Mes/{anio}/{inver}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facturas",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "inver",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.TransacController",
+    "Method": "GetCostosCuentasxMesDetallada",
+    "RelativePath": "api/Transac/getCostosCuentasxMesDetallada/{anio}/{mes}/{cuenta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "anio",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "mes",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "cuenta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBInventarioZeusAPI.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DBInventarioZeusAPI.WeatherForecast, ContabilidadZeusAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

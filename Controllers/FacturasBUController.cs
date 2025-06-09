@@ -75,8 +75,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         //CARTERA TOTAL POR FACTURA
-        [HttpGet("getCarteraTotal")]
-        public ActionResult GetCarteraTotal(string? vendedor = "", string? cliente = "")
+        [HttpPost("getCarteraTotal")]
+        public ActionResult GetCarteraTotal([FromBody] List<string> clientes, string? vendedor = "")
         {
             var hoy = DateTime.Now;
 
@@ -88,7 +88,7 @@ namespace ContabilidadZeusAPI.Controllers
                             && vende.Idvende == fac.Idvende
                             && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? vende.Nombvende == vendedor : vende.Nombvende.Contains(vendedor))
-                            && (cliente != "" ? cli.Razoncial == cliente : cli.Razoncial.Contains(cliente))
+                            && (clientes.Any() ? clientes.Contains(cli.Idcliente) : cli.Idcliente.Contains(""))
                       orderby fac.Numefac ascending
                       select new
                       {
@@ -195,8 +195,8 @@ namespace ContabilidadZeusAPI.Controllers
         }
 
         //CARTERA POR AGRUPADA POR CLIENTES
-        [HttpGet("getCarteraAgrupadaClientes")]
-        public ActionResult GetCarteraAgrupadaClientes(string? vendedor = "", string? cliente = "")
+        [HttpPost("getCarteraAgrupadaClientes")]
+        public ActionResult GetCarteraAgrupadaClientes([FromBody] List<string> clientes, string? vendedor = "")
         {
             var con = from f in _context.Set<FacturasBu>()
                       join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
@@ -204,7 +204,7 @@ namespace ContabilidadZeusAPI.Controllers
                       where f.Sactfac > 0
                             && f.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
-                            && (cliente != "" ? c.Razoncial == cliente : c.Razoncial.Contains(cliente))
+                            && (clientes.Any() ? clientes.Contains(c.Idcliente) : c.Idcliente.Contains(""))
                       group new { f, c, v } by new
                       {
                           c.Idcliente,

@@ -5,6 +5,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\pc-sistemas\\documents\\github\\zeuscontabilidadapi\\controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\pc-sistemas\\documents\\github\\zeuscontabilidadapi\\models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\pc-sistemas\\documents\\github\\zeuscontabilidadapi\\controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\pc-sistemas\\documents\\github\\zeuscontabilidadapi\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\pc-sistemas\\documents\\github\\zeuscontabilidadapi\\models\\appvariableslistoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:models\\appvariableslistoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 309,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,13 +66,64 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientesController.cs",
+              "DocumentMoniker": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
+              "ToolTip": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
+              "RelativeToolTip": "Controllers\\ClientesController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwDMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T16:06:46.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthenticationController .cs",
+              "DocumentMoniker": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthenticationController .cs",
+              "ToolTip": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
+              "RelativeToolTip": "Controllers\\AuthenticationController .cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAACYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T16:06:45.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppVariablesListOption.cs",
+              "DocumentMoniker": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Models\\AppVariablesListOption.cs",
+              "RelativeDocumentMoniker": "Models\\AppVariablesListOption.cs",
+              "ToolTip": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Models\\AppVariablesListOption.cs",
+              "RelativeToolTip": "Models\\AppVariablesListOption.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAqwAUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T16:06:44.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppLogMessage.cs",
+              "DocumentMoniker": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
+              "RelativeDocumentMoniker": "Models\\AppLogMessage.cs",
+              "ToolTip": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
+              "RelativeToolTip": "Models\\AppLogMessage.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA6wA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T16:06:42.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "FacturasBUController.cs",
               "DocumentMoniker": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeDocumentMoniker": "Controllers\\FacturasBUController.cs",
               "ToolTip": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeToolTip": "Controllers\\FacturasBUController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAIwGoAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-29T21:30:55.601Z",
               "EditorCaption": ""
@@ -70,6 +137,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }
