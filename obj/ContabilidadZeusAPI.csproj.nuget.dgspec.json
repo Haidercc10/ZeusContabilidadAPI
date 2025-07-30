@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
+    "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
+    "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "projectUniqueName": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
         "projectName": "ContabilidadZeusAPI",
-        "projectPath": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
-        "packagesPath": "C:\\Users\\PC-SISTEMAS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC-SISTEMAS\\Documents\\GitHub\\ZeusContabilidadAPI\\obj\\",
+        "projectPath": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\ContabilidadZeusAPI.csproj",
+        "packagesPath": "C:\\Users\\HaiderCarrillo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC-SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HaiderCarrillo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net7.0": {
@@ -152,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
