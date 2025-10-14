@@ -469,7 +469,7 @@
       }
     },
     "/api/FacturasBU/getCarteraTotal": {
-      "get": {
+      "post": {
         "tags": [
           "FacturasBU"
         ],
@@ -481,16 +481,36 @@
               "type": "string",
               "default": ""
             }
-          },
-          {
-            "name": "cliente",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -626,6 +646,62 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/FacturasBU/getHerrajesAndina/{fecha1}/{fecha2}": {
+      "get": {
+        "tags": [
+          "FacturasBU"
+        ],
+        "parameters": [
+          {
+            "name": "fecha1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fecha2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "vendedor",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "item",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "cliente",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
             }
           }
         ],

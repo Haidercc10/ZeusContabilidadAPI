@@ -353,17 +353,17 @@
     "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
     "Method": "GetCarteraTotal",
     "RelativePath": "api/FacturasBU/getCarteraTotal",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "vendedor",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "clientes",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
       },
       {
-        "Name": "cliente",
+        "Name": "vendedor",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -382,6 +382,42 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContabilidadZeusAPI.Controllers.FacturasBUController",
+    "Method": "getHerrajesAndina",
+    "RelativePath": "api/FacturasBU/getHerrajesAndina/{fecha1}/{fecha2}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fecha1",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      },
+      {
+        "Name": "fecha2",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      },
+      {
+        "Name": "vendedor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "item",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "cliente",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
