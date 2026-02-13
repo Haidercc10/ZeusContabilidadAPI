@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\",
+  "WorkspaceRootPath": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\haidercarrillo\\onedrive - plasticaribe s.a.s\\documentos\\github\\zeuscontabilidadapi\\controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\haidercarrillo\\onedrive - plasticaribe s.a.s\\documentos\\github\\zeuscontabilidadapi\\controllers\\facturaslibroprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\facturaslibroprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\facturaslibroprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\haidercarrillo\\onedrive - plasticaribe s.a.s\\documentos\\github\\zeuscontabilidadapi\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\haidercarrillo\\onedrive - plasticaribe s.a.s\\documentos\\github\\zeuscontabilidadapi\\models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\users\\haidercarrillo\\onedrive - plasticaribe s.a.s\\documentos\\github\\zeuscontabilidadapi\\controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -68,35 +68,33 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "FacturasLibroPrincipal.cs",
-              "DocumentMoniker": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
               "RelativeDocumentMoniker": "Controllers\\FacturasLibroPrincipal.cs",
-              "ToolTip": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
               "RelativeToolTip": "Controllers\\FacturasLibroPrincipal.cs",
               "ViewState": "AgIAAH8AAAAAAAAAAAAcwJIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T17:02:41.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T17:02:41.505Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ClientesController.cs",
-              "DocumentMoniker": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
-              "ToolTip": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
               "RelativeToolTip": "Controllers\\ClientesController.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAQwDMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:46.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T16:06:46.672Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "AuthenticationController .cs",
-              "DocumentMoniker": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
               "RelativeDocumentMoniker": "Controllers\\AuthenticationController .cs",
-              "ToolTip": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
               "RelativeToolTip": "Controllers\\AuthenticationController .cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAAACYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -106,24 +104,23 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "AppLogMessage.cs",
-              "DocumentMoniker": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
               "RelativeDocumentMoniker": "Models\\AppLogMessage.cs",
-              "ToolTip": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
               "RelativeToolTip": "Models\\AppLogMessage.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA2wA0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:42.827Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T16:06:42.827Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "FacturasBUController.cs",
-              "DocumentMoniker": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeDocumentMoniker": "Controllers\\FacturasBUController.cs",
-              "ToolTip": "C:\\Users\\HaiderCarrillo\\OneDrive - PLASTICARIBE S.A.S\\Documentos\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeToolTip": "Controllers\\FacturasBUController.cs",
-              "ViewState": "AgIAAPUAAAAAAAAAAAAiwAQBAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAAOQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-29T21:30:55.601Z",
               "EditorCaption": ""

@@ -194,6 +194,43 @@ namespace ContabilidadZeusAPI.Controllers
             return Ok(con);
         }
 
+        [HttpGet("getCarteraClientes2/{cliente}")]
+        public async Task<ActionResult> GetCarteraClientes2(string cliente)
+        {
+            var ultimoPeriodo = await _context.Set<FacturasBu>()
+                .MaxAsync(x => x.Anomesfac);
+
+            var cartera = await (
+                from cli in _context.Set<Cliente>()
+                join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
+                join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
+                where fac.Sactfac > 0
+                      && fac.Idcliprv == cliente
+                      && fac.Anomesfac == ultimoPeriodo
+                orderby fac.Numefac ascending
+                select new
+                {
+                    Num_Factura = fac.Numefac,
+                    Nombre_CLiente = cli.Razoncial,
+                    LAPSO_DOC = fac.Fechfac,
+                    Fecha_Vencimiento = fac.Vencfac,
+                    Nombre_Vendedor = vendedor.Nombvende,
+                    Id_Vendedor = fac.Idvende,
+                    Tipo_Movimiento = "FV",
+                    Saldo_Cartera = fac.Sactfac,
+                    Fecha_Radicado = fac.Fecharadicado,
+                    TipoCliente = "05",
+                    Direccion_Cliente = cli.Direccion,
+                    Telefono_Cliente = cli.Telefono,
+                    Id_Cliente = fac.Idcliprv,
+                    Ciudad_Cliente = cli.Ciudad,
+                    Plazo_De_Pago = cli.Diplazo,
+                }
+            ).ToListAsync();
+
+            return Ok(cartera);
+        }
+
         //CARTERA POR AGRUPADA POR CLIENTES
         [HttpPost("getCarteraAgrupadaClientes")]
         public ActionResult GetCarteraAgrupadaClientes([FromBody] List<string> clientes, string? vendedor = "")
