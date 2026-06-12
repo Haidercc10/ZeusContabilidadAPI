@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ContabilidadZeusAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c5b89ac5a8b0f56b3f9e3cd15c7fd0faebae0d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e148135e73608b5c9c994d136b4648762f89014c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ContabilidadZeusAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ContabilidadZeusAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
