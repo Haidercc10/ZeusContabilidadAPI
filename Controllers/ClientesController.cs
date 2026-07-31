@@ -45,29 +45,32 @@ namespace ContabilidadZeusAPI.Controllers
             return cliente;
         }
 
+        //Funcion para obtener los clientes con sus respectivos vendedores
         [HttpGet("getClientes")]
-        public ActionResult Get()
+        public async Task<ActionResult> getClientes()
         {
-            var clietes = from cli in _context.Set<Cliente>()
-                          select new
+            var clientes = await (from cli in _context.Set<Cliente>().AsNoTracking()
+                                  select new
                           {
                               cli.Idcliente,
                               cli.Razoncial,
                               cli.Idvende,
-                          };
-            return Ok(clietes);
+                          }).ToListAsync();
+
+            return Ok(clientes);
         }
 
+        //Funcion para obtener los clientes de un vendedor especifico
         [HttpGet("getClientes_Vendedor/{vendedor}")]
-        public ActionResult GetClientes_Vendedor(string vendedor)
+        public async Task<ActionResult> GetClientes_Vendedor(string vendedor)
         {
-            var clientes = from cli in _context.Set<Cliente>()
+            var clientes = await (from cli in _context.Set<Cliente>().AsNoTracking()
                            where cli.Idvende == vendedor
                            select new
                            {
                                cli.Idcliente,
                                cli.Razoncial
-                           };
+                           }).ToListAsync();
             return Ok(clientes);
         }
 

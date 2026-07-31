@@ -52,16 +52,16 @@ namespace ContabilidadZeusAPI.Controllers
 
         // GET: api/Transac/5
         [HttpGet("getCostosCuentasxMesDetallada/{anio}/{mes}/{cuenta}")]
-        public ActionResult GetCostosCuentasxMesDetallada(string anio, string mes, string cuenta)
+        public async Task<ActionResult> GetCostosCuentasxMesDetallada(string anio, string mes, string cuenta)
         {
             if (_context.Transacs == null) return NotFound();
 
             //if (mes.ToString().Length > 1) mes = $"{mes}";
             //else mes = $"0{mes}";
 
-            var transac = from tr in _context.Set<Transac>()
-                          from fu in _context.Set<Fuente>()
-                          from ec in _context.Set<EscenariosCuenta>()
+            var transac = await (from tr in _context.Set<Transac>().AsNoTracking()
+                          join fu in _context.Set<Fuente>().AsNoTracking() on tr.Idfuente equals fu.Idfuente
+                          join ec in _context.Set<EscenariosCuenta>().AsNoTracking() on tr.Codicta equals ec.Id
                           where tr.Idfuente == fu.Idfuente &&
                           tr.Codicta == ec.Id &&
                           tr.Codicta == cuenta &&
@@ -87,13 +87,13 @@ namespace ContabilidadZeusAPI.Controllers
                               Descripcion_Transaccion = tr.Descritra,
                               Valor = tr.Valortra,
                               Id_CentroCosto = tr.Idcenco,
-                              Centro_Costo = tr.Idcenco == "" ? "N/A" : (from cc in _context.Set<CcmCentroCosto>() where cc.CodigoCentroCosto == tr.Idcenco select cc.DescripcionCentroCosto).FirstOrDefault(),
+                              Centro_Costo = tr.Idcenco == "" ? "N/A" : (from cc in _context.Set<CcmCentroCosto>().AsNoTracking() where cc.CodigoCentroCosto == tr.Idcenco select cc.DescripcionCentroCosto).FirstOrDefault(),
                               Fecha_Grabacion = tr.Fgratra,
                               Estado = tr.Statustra,
                               Origen_Mov = tr.IdOrigenMovimiento,
                               Id_Proveedor = tr.Nittra,
-                              Proveedor = tr.Nittra == "0" ? "N/A" : (from pr in _context.Set<Tercero>() where pr.Idtercero == tr.Nittra select pr.Nombreter).FirstOrDefault(),
-                          };
+                              Proveedor = tr.Nittra == "0" ? "N/A" : (from pr in _context.Set<Tercero>().AsNoTracking() where pr.Idtercero == tr.Nittra select pr.Nombreter).FirstOrDefault(),
+                          }).ToListAsync();
 
             if (transac == null) return BadRequest("No se encontraron registros de búsqueda!");
             return Ok(transac);
@@ -101,7 +101,7 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CONSULTA QUE DEVOLVERÁ EL TOTAL DE COSTO DE LAS COMPRAS EN CADA MES EN UN AÑO QUE LE SEA PASADO
         [HttpPost("getCostos_Compras_Mes_Mes/{anio}/{inver}")]
-        public IActionResult GetCostos_Compras_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
+        public async Task<IActionResult> GetCostos_Compras_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
             var cuentas14 = new List<string>();
@@ -112,12 +112,12 @@ namespace ContabilidadZeusAPI.Controllers
             invergoal_inversuez.Add("900362200");
             invergoal_inversuez.Add("900458314");
 
-            var con = from T1 in _context.Set<Transac>()
-                      where cuentas14.Contains(T1.Codicta) &&
+            var con = await (from T1 in _context.Set<Transac>().AsNoTracking()
+                             where cuentas14.Contains(T1.Codicta) &&
                             T1.Idfuente == "EA" &&
                             T1.Anotra.StartsWith(anio) &&
                             (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
-                            (from T2 in _context.Set<Transac>()
+                            (from T2 in _context.Set<Transac>().AsNoTracking()
                              where !facturas.Contains(T2.Numefac)
                              select T2.Numdoctra).Contains(T1.Numdoctra)
                       group T1 by new
@@ -128,7 +128,7 @@ namespace ContabilidadZeusAPI.Controllers
                       {
                           Periodo = T.Key.Anotra,
                           Costo = T.Sum(x => x.Valortra)
-                      };
+                      }).ToListAsync();
 
             return con.Any() ? Ok(con) : NotFound($"No se encontró información del año {anio}");
 #pragma warning restore CS8604 // Posible argumento de referencia nulo
@@ -136,7 +136,7 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CONSULTA QUE VA A DEVOLVER LOS COSTOS DE LAS COMPRAS AGRUPADOS POR PROVEEDOR, AÑO Y MES
         [HttpPost("getCostos_Compras_Proveedores_Mes_Mes/{anio}/{inver}")]
-        public ActionResult GetCostos_Compras_Proveedores_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
+        public async Task<ActionResult> GetCostos_Compras_Proveedores_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
             var cuentas14 = new List<string>();
             cuentas14.Add("140505");
@@ -151,17 +151,17 @@ namespace ContabilidadZeusAPI.Controllers
             invergoal_inversuez.Add("900458314");
 
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
-            var con = from T1 in _context.Set<Transac>()
-                      join T2 in _context.Set<Transac>() on T1.Numdoctra equals T2.Numdoctra
-                      join P in _context.Set<Proveedore>() on T1.Nittra equals P.Idprove
+            var con = await (from T1 in _context.Set<Transac>().AsNoTracking()
+                             join T2 in _context.Set<Transac>().AsNoTracking() on T1.Numdoctra equals T2.Numdoctra
+                      join P in _context.Set<Proveedore>().AsNoTracking() on T1.Nittra equals P.Idprove
                       where !facturas.Contains(T1.Numefac) &&
                             T1.Idfuente == "EA" &&
                             cuentas22.Contains(T1.Codicta) &&
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
                             (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
-                            T2.Numdoctra == (from T3 in _context.Set<Transac>()
-                                              join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
+                            T2.Numdoctra == (from T3 in _context.Set<Transac>().AsNoTracking()
+                                             join T4 in _context.Set<Transac>().AsNoTracking() on T3.Numdoctra equals T4.Numdoctra
                                               where T3.Idfuente == "EA" &&
                                                     cuentas22.Contains(T3.Codicta) &&
                                                     cuentas14.Contains(T4.Codicta) &&
@@ -187,7 +187,7 @@ namespace ContabilidadZeusAPI.Controllers
                           T.Key.Id_Proveedor,
                           T.Key.Proveedor,
                           Costo = T.Sum(x => x.T2.Valortra)
-                      };
+                      }).ToListAsync();
 #pragma warning restore CS8604 // Posible argumento de referencia nulo
 
             return con.Any() ? Ok(con) : NotFound($"No se encontró información del año {anio}");
@@ -195,7 +195,7 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CONSULTA QUE VA A DEVOLVER LOS COSTOS DE LAS COMPRAS AGRUPADOS POR FACTURA, AÑO Y MES
         [HttpPost("getCostos_Compras_Facturas_Mes_Mes/{anio}/{inver}")]
-        public ActionResult GetCostos_Compras_Facturas_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
+        public async Task<ActionResult> GetCostos_Compras_Facturas_Mes_Mes([FromBody] List<string> facturas, string anio, string inver)
         {
             var cuentas14 = new List<string>();
             cuentas14.Add("140505");
@@ -210,17 +210,17 @@ namespace ContabilidadZeusAPI.Controllers
             invergoal_inversuez.Add("900458314");
 
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
-            var con = from T1 in _context.Set<Transac>()
-                      join T2 in _context.Set<Transac>() on T1.Numdoctra equals T2.Numdoctra
-                      join P in _context.Set<Proveedore>() on T1.Nittra equals P.Idprove
+            var con = await (from T1 in _context.Set<Transac>().AsNoTracking()
+                             join T2 in _context.Set<Transac>().AsNoTracking() on T1.Numdoctra equals T2.Numdoctra
+                      join P in _context.Set<Proveedore>().AsNoTracking() on T1.Nittra equals P.Idprove
                       where !facturas.Contains(T1.Numefac) &&
                             T1.Idfuente == "EA" &&
                             cuentas22.Contains(T1.Codicta) &&
                             cuentas14.Contains(T2.Codicta) &&
                             T1.Anotra.StartsWith(anio) &&
                             (invergoal_inversuez.Contains(inver) ? inver == T1.Nittra : !invergoal_inversuez.Contains(T1.Nittra)) &&
-                            T2.Numdoctra == (from T3 in _context.Set<Transac>()
-                                              join T4 in _context.Set<Transac>() on T3.Numdoctra equals T4.Numdoctra
+                            T2.Numdoctra == (from T3 in _context.Set<Transac>().AsNoTracking()
+                                              join T4 in _context.Set<Transac>().AsNoTracking() on T3.Numdoctra equals T4.Numdoctra
                                               where T3.Idfuente == "EA" &&
                                                     cuentas22.Contains(T3.Codicta) &&
                                                     cuentas14.Contains(T4.Codicta) &&
@@ -253,7 +253,7 @@ namespace ContabilidadZeusAPI.Controllers
                           T.Key.Fecha_Factura,
                           T.Key.Fecha_Vencimiento,
                           Costo = T.Sum(x => x.T2.Valortra)
-                      };
+                      }).ToListAsync();
 #pragma warning restore CS8604 // Posible argumento de referencia nulo
 
             return con.Any() ? Ok(con) : NotFound($"No se encontró información del año {anio}");

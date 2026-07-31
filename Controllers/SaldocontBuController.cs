@@ -52,15 +52,15 @@ namespace ContabilidadZeusAPI.Controllers
 
         //Consulta que devolverá los costos de las cuentas mes a mes
         [HttpGet("getCostosCuentas_Mes_Mes/{anio}")]
-        public ActionResult GetCostosCuentas_Mes_Mes(string anio)
+        public async Task<ActionResult> GetCostosCuentas_Mes_Mes(string anio)
         {
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
             var datos = new List<object>();
             for (int i = 0; i < 12; i++)
             {
                 string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
-                var con = from cos in _context.Set<SaldocontBu>()
-                          join cun in _context.Set<CcmPlandeCuenta>() on cos.Codicta equals cun.Cuenta
+                var con = await (from cos in _context.Set<SaldocontBu>().AsNoTracking()
+                          join cun in _context.Set<CcmPlandeCuenta>().AsNoTracking() on cos.Codicta equals cun.Cuenta
                           where cos.Anomescta == $"{anio}{mes}" &&
                                 (cun.Cuenta.StartsWith("5") ||
                                 cun.Cuenta.StartsWith("7"))
@@ -81,7 +81,7 @@ namespace ContabilidadZeusAPI.Controllers
                               Debito = data.Sum(x => x.cos.Mvdbcta),
                               Credito = data.Sum(x => x.cos.Mvcrcta),
                               Valor = data.Sum(x => x.cos.Mvdbcta) - data.Sum(x => x.cos.Mvcrcta),
-                          };
+                          }).ToListAsync();
 
                 datos.Add(con);
                 if (i == 11) return Ok(datos);

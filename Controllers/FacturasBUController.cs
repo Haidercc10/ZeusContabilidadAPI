@@ -50,43 +50,43 @@ namespace ContabilidadZeusAPI.Controllers
 
         // CARTERA POR AÑO Y MES
         [HttpGet("getCartera_Anio_Mes/{anio}/{mes}")]
-        public ActionResult GetCartera_Anio_Mes(string anio, string mes)
+        public async Task<ActionResult> GetCartera_Anio_Mes(string anio, string mes)
         {
 #pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-            var con = (from f in _context.Set<FacturasBu>()
-                       from c in _context.Set<Cliente>()
-                       from v in _context.Set<Maevende>()
-                       join subFac in _context.Set<FacturasBu>() on f.Numefac equals subFac.Numefac into details
+            var con = await (from f in _context.Set<FacturasBu>().AsNoTracking()
+                       join c in _context.Set<Cliente>().AsNoTracking() on f.Idcliprv equals c.Idcliente
+                       join v in _context.Set<Maevende>().AsNoTracking() on f.Idvende equals v.Idvende
+                       join subFac in _context.Set<FacturasBu>().AsNoTracking() on f.Numefac equals subFac.Numefac into details
                        where f.Sactfac > 0
                              && c.Idcliente == f.Idcliprv
                              && v.Idvende == f.Idvende
                              && details.Max(x => x.IdenFacturasBu) == f.IdenFacturasBu
-                             && (from fac2 in _context.Set<FacturasBu>()
+                             && (from fac2 in _context.Set<FacturasBu>().AsNoTracking()
                                  where fac2.Numefac == f.Numefac
                                  orderby fac2.IdenFacturasBu ascending
                                  select fac2.Fecharadicado).FirstOrDefault().Substring(0, 4) == anio
-                             && (from fac2 in _context.Set<FacturasBu>()
+                             && (from fac2 in _context.Set<FacturasBu>().AsNoTracking()
                                  where fac2.Numefac == f.Numefac
                                  orderby fac2.IdenFacturasBu ascending
                                  select fac2.Fecharadicado).FirstOrDefault().Substring(5, 2) == mes
-                       select f.Sactfac).Sum();
+                       select f.Sactfac).SumAsync();
 #pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
             return con > 0 ? Ok(con) : BadRequest("No hay datos encontrados");
         }
 
         //CARTERA TOTAL POR FACTURA
         [HttpPost("getCarteraTotal")]
-        public ActionResult GetCarteraTotal([FromBody] List<string> clientes, string? vendedor = "")
+        public async Task<ActionResult> GetCarteraTotal([FromBody] List<string> clientes, string? vendedor = "")
         {
             var hoy = DateTime.Now;
 
-            var con = from cli in _context.Set<Cliente>()
-                      from vende in _context.Set<Maevende>()
-                      from fac in _context.Set<FacturasBu>()
+            var con = await (from cli in _context.Set<Cliente>().AsNoTracking()
+                      join vende in _context.Set<Maevende>().AsNoTracking() on cli.Idvende equals vende.Idvende
+                      join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
                       where fac.Sactfac > 0
                             && cli.Idcliente == fac.Idcliprv
                             && vende.Idvende == fac.Idvende
-                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>().AsNoTracking() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? vende.Nombvende == vendedor : vende.Nombvende.Contains(vendedor))
                             && (clientes.Any() ? clientes.Contains(cli.Idcliente) : cli.Idcliente.Contains(""))
                       orderby fac.Numefac ascending
@@ -94,7 +94,7 @@ namespace ContabilidadZeusAPI.Controllers
                       {
                           Num_Factura = fac.Numefac,
                           Nombre_CLiente = cli.Razoncial,
-                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>()
+                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>().AsNoTracking()
                                       where fac2.Numefac == fac.Numefac
                                       orderby fac2.IdenFacturasBu ascending
                                       select fac2.Fecharadicado).FirstOrDefault(),
@@ -103,7 +103,7 @@ namespace ContabilidadZeusAPI.Controllers
                           Nombre_Vendedor = vende.Nombvende,
                           Id_Vendedor = fac.Idvende,
                           Tipo_Movimiento = "FV",
-                          Saldo_Cartera = fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum(),
+                          Saldo_Cartera = fac.Sactfac + (from fbu in _context.Set<FacturasBu>().AsNoTracking() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum(),
                           Fecha_Radicado = fac.Fecharadicado,
                           TipoCliente = "05",
                           Direccion_Cliente = cli.Direccion,
@@ -118,26 +118,26 @@ namespace ContabilidadZeusAPI.Controllers
                           SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 90 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
                           SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
                           SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days > 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1
-                      };
+                      }).ToListAsync();
             return Ok(con);
         }
 
         //CARTERA POR VENDEDOR
         [HttpGet("getCarteraVendedor/{id}")]
-        public ActionResult GetCarteraVendedor(string id)
+        public async Task<ActionResult> GetCarteraVendedor(string id)
         {
-            var con = from cli in _context.Set<Cliente>()
-                      join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
-                      join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
+            var con = await (from cli in _context.Set<Cliente>().AsNoTracking()
+                      join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
+                      join vendedor in _context.Set<Maevende>().AsNoTracking() on fac.Idvende equals vendedor.Idvende
                       where fac.Sactfac > 0
                             && fac.Idvende == id
-                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>().AsNoTracking() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                       orderby fac.Numefac ascending
                       select new
                       {
                           Num_Factura = fac.Numefac,
                           Nombre_CLiente = cli.Razoncial,
-                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>()
+                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>().AsNoTracking()
                                       where fac2.Numefac == fac.Numefac
                                       orderby fac2.IdenFacturasBu ascending
                                       select fac2.Fecharadicado).FirstOrDefault(),
@@ -154,26 +154,26 @@ namespace ContabilidadZeusAPI.Controllers
                           Id_Cliente = fac.Idcliprv,
                           Ciudad_Cliente = cli.Ciudad,
                           Plazo_De_Pago = cli.Diplazo,
-                      };
+                      }).ToListAsync();
             return Ok(con);
         }
 
         //CARTERA POR CLIENTES
         [HttpGet("getCarteraClientes/{cliente}")]
-        public ActionResult GetCarteraClientes(string cliente)
+        public async Task<ActionResult> GetCarteraClientes(string cliente)
         {
-            var con = from cli in _context.Set<Cliente>()
-                      join fac in _context.Set<FacturasBu>() on cli.Idcliente equals fac.Idcliprv
-                      join vendedor in _context.Set<Maevende>() on fac.Idvende equals vendedor.Idvende
+            var con = await (from cli in _context.Set<Cliente>().AsNoTracking()
+                      join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
+                      join vendedor in _context.Set<Maevende>().AsNoTracking() on fac.Idvende equals vendedor.Idvende
                       where fac.Sactfac > 0
                             && fac.Idcliprv == cliente
-                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
+                            && fac.Anomesfac == (from fb in _context.Set<FacturasBu>().AsNoTracking() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                       orderby fac.Numefac ascending
                       select new
                       {
                           Num_Factura = fac.Numefac,
                           Nombre_CLiente = cli.Razoncial,
-                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>()
+                          Id_Fecha = (from fac2 in _context.Set<FacturasBu>().AsNoTracking()
                                       where fac2.Numefac == fac.Numefac
                                       orderby fac2.IdenFacturasBu ascending
                                       select fac2.Fecharadicado).FirstOrDefault(),
@@ -190,7 +190,7 @@ namespace ContabilidadZeusAPI.Controllers
                           Id_Cliente = fac.Idcliprv,
                           Ciudad_Cliente = cli.Ciudad,
                           Plazo_De_Pago = cli.Diplazo,
-                      };
+                      }).ToListAsync();
             return Ok(con);
         }
 
@@ -233,13 +233,13 @@ namespace ContabilidadZeusAPI.Controllers
 
         //CARTERA POR AGRUPADA POR CLIENTES
         [HttpPost("getCarteraAgrupadaClientes")]
-        public ActionResult GetCarteraAgrupadaClientes([FromBody] List<string> clientes, string? vendedor = "")
+        public async Task<ActionResult> GetCarteraAgrupadaClientes([FromBody] List<string> clientes, string? vendedor = "")
         {
-            var con = from f in _context.Set<FacturasBu>()
-                      join c in _context.Set<Cliente>() on f.Idcliprv equals c.Idcliente
-                      join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
+            var con = await (from f in _context.Set<FacturasBu>().AsNoTracking()
+                      join c in _context.Set<Cliente>().AsNoTracking() on f.Idcliprv equals c.Idcliente
+                      join v in _context.Set<Maevende>().AsNoTracking() on f.Idvende equals v.Idvende
                       where f.Sactfac > 0
-                            && f.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
+                            && f.Anomesfac == (from fb in _context.Set<FacturasBu>().AsNoTracking() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
                             && (clientes.Any() ? clientes.Contains(c.Idcliente) : c.Idcliente.Contains(""))
                       group new { f, c, v } by new
@@ -257,16 +257,16 @@ namespace ContabilidadZeusAPI.Controllers
                           f.Key.Nombvende,
                           f.Key.Idvende,
                           SubTotal = f.Sum(x => x.f.Sactfac)
-                      };
+                      }).ToListAsync();
             return Ok(con);
         }
 
         //CARTERA POR AGRUPADA POR VENDEDORES
         [HttpGet("getCarteraAgrupadaVendedores")]
-        public ActionResult GetCarteraAgrupadaVendedores(string? vendedor = "")
+        public async Task<ActionResult> GetCarteraAgrupadaVendedores(string? vendedor = "")
         {
-            var con = from f in _context.Set<FacturasBu>()
-                      join v in _context.Set<Maevende>() on f.Idvende equals v.Idvende
+            var con = await (from f in _context.Set<FacturasBu>().AsNoTracking()
+                      join v in _context.Set<Maevende>().AsNoTracking() on f.Idvende equals v.Idvende
                       where f.Sactfac > 0
                             && f.Anomesfac == (from fb in _context.Set<FacturasBu>() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? v.Nombvende == vendedor : v.Nombvende.Contains(vendedor))
@@ -281,24 +281,24 @@ namespace ContabilidadZeusAPI.Controllers
                           f.Key.Nombvende,
                           f.Key.Idvende,
                           SubTotal = f.Sum(x => x.f.Sactfac)
-                      };
+                      }).ToListAsync();
             return Ok(con);
         }
 
         // CARTERA MES A MES, AÑO A AÑO
         [HttpGet("getCartera_Mes_Anio/{periodo}")]
-        public ActionResult GetCartera_Mes_Anio(string periodo)
+        public async Task<ActionResult> GetCartera_Mes_Anio(string periodo)
         {
 #pragma warning disable CS8604 // Posible argumento de referencia nulo
             var datos = new List<object>();
             for (int i = 0; i < 12; i++)
             {
                 string mes = (i + 1).ToString().Length > 1 ? $"{i + 1}" : $"0{i + 1}";
-                var con = (from f in _context.Set<FacturasBu>()
+                var con = await (from f in _context.Set<FacturasBu>().AsNoTracking()
                            where f.Sactfac > 0 &&
                                  f.Idvende != "" &&
                                  f.Anomesfac == $"{periodo}{mes}" &&
-                                 f.IdenFacturasBu == (from f2 in _context.Set<FacturasBu>()
+                                 f.IdenFacturasBu == (from f2 in _context.Set<FacturasBu>().AsNoTracking()
                                                       where f2.Numefac == f.Numefac &&
                                                             f2.Anomesfac == $"{periodo}{mes}"
                                                       select f2.IdenFacturasBu).Max()
@@ -309,7 +309,7 @@ namespace ContabilidadZeusAPI.Controllers
                                f.Key.Anomesfac,
                                Mes = mes,
                                Valor = f.Sum(x => x.Sactfac)
-                           }).FirstOrDefault();
+                           }).FirstOrDefaultAsync();
                 datos.Add(con);
                 if (i == 11) return Ok(datos);
             }

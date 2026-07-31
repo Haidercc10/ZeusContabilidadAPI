@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\facturasbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,12 +15,20 @@
       "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\facturaslibroprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\saldocontbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\saldocontbucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:models\\applogmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\saldoprov_libroprincipalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\saldoprov_libroprincipalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\terceroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\terceroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\transaccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|solutionrelative:controllers\\transaccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6B9C7674-C9FE-40B0-AB0C-A75459F95E20}|ContabilidadZeusAPI.csproj|c:\\dev\\github\\zeuscontabilidadapi\\controllers\\authenticationcontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 309,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,64 +82,107 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "TercerosController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TercerosController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
+              "RelativeToolTip": "Controllers\\TercerosController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-17T18:32:47.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SaldocontBuController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\SaldocontBuController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SaldocontBuController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\SaldocontBuController.cs",
+              "RelativeToolTip": "Controllers\\SaldocontBuController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwDYAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-17T18:31:51.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SaldoProv_LibroPrincipalController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\SaldoProv_LibroPrincipalController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SaldoProv_LibroPrincipalController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\SaldoProv_LibroPrincipalController.cs",
+              "RelativeToolTip": "Controllers\\SaldoProv_LibroPrincipalController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T17:48:38.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransacController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TransacController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TransacController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TransacController.cs",
+              "RelativeToolTip": "Controllers\\TransacController.cs",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAmwNYAAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T16:25:22.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ClientesController.cs",
               "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
               "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\ClientesController.cs",
               "RelativeToolTip": "Controllers\\ClientesController.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAQwDMAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwD8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:46.672Z"
+              "WhenOpened": "2025-05-28T16:06:46.672Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "AuthenticationController .cs",
               "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
               "RelativeDocumentMoniker": "Controllers\\AuthenticationController .cs",
               "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\AuthenticationController .cs",
               "RelativeToolTip": "Controllers\\AuthenticationController .cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAAACYAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwCYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:45.33Z"
+              "WhenOpened": "2025-05-28T16:06:45.33Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppLogMessage.cs",
-              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
-              "RelativeDocumentMoniker": "Models\\AppLogMessage.cs",
-              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Models\\AppLogMessage.cs",
-              "RelativeToolTip": "Models\\AppLogMessage.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA2wA0AAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:42.827Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "FacturasBUController.cs",
               "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeDocumentMoniker": "Controllers\\FacturasBUController.cs",
               "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeToolTip": "Controllers\\FacturasBUController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAkwGAAAABNAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwGkAAABuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-29T21:30:55.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FacturasLibroPrincipal.cs",
               "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
               "RelativeDocumentMoniker": "Controllers\\FacturasLibroPrincipal.cs",
               "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasLibroPrincipal.cs",
               "RelativeToolTip": "Controllers\\FacturasLibroPrincipal.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAcwJIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAIwIgAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T17:02:41.505Z"
+              "WhenOpened": "2025-09-11T17:02:41.505Z",
+              "EditorCaption": ""
             }
           ]
         },

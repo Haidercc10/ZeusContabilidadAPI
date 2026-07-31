@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
 namespace ContabilidadZeusAPI.Controllers
@@ -31,15 +31,15 @@ namespace ContabilidadZeusAPI.Controllers
 
         // GET: api/<SaldoProvLibroPrincipal>
         [HttpGet("getCostosProveedores/{cuenta}")]
-        public ActionResult GetCostosProveedores(string cuenta)
+        public async Task<ActionResult> GetCostosProveedores(string cuenta)
         {
             var cuentas = new List<string>();
             cuentas.Add("220505");
             cuentas.Add("220510");
 
-            var con = from S in _context.Set<SaldoProvLibroPrincipal>()
-                      join P in _context.Set<Proveedore>() on S.Idprove equals P.Idprove
-                      where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>()
+            var con = await (from S in _context.Set<SaldoProvLibroPrincipal>().AsNoTracking()
+                             join P in _context.Set<Proveedore>().AsNoTracking() on S.Idprove equals P.Idprove
+                      where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>().AsNoTracking()
                                             where S2.Idprove == S.Idprove
                                             select S2.Anomescta).Max() &&
                             cuentas.Contains(S.Codicta) &&
@@ -59,21 +59,21 @@ namespace ContabilidadZeusAPI.Controllers
                           S.Key.Sdaccta,
                           S.Key.Anomescta,
                           S.Key.Codicta,
-                      };
+                      }).ToListAsync();
 
             return con.Any() ? Ok(con) : BadRequest();
         }
 
         // GET: api/<SaldoProvLibroPrincipal>
         [HttpGet("getCostosTotalProveedores/{cuenta}")]
-        public ActionResult GetCostosTotalProveedores(string cuenta)
+        public async Task<ActionResult> GetCostosTotalProveedores(string cuenta)
         {
             var cuentas = new List<string>();
             cuentas.Add("220505");
             cuentas.Add("220510");
-            var con = (from S in _context.Set<SaldoProvLibroPrincipal>()
-                      join P in _context.Set<Proveedore>() on S.Idprove equals P.Idprove
-                      where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>()
+            var con = await (from S in _context.Set<SaldoProvLibroPrincipal>().AsNoTracking()
+                      join P in _context.Set<Proveedore>().AsNoTracking() on S.Idprove equals P.Idprove
+                      where S.Anomescta == (from S2 in _context.Set<SaldoProvLibroPrincipal>().AsNoTracking()
                                             where S2.Idprove == S.Idprove
                                             select S2.Anomescta).Max() &&
                             cuentas.Contains(S.Codicta) &&
@@ -87,7 +87,7 @@ namespace ContabilidadZeusAPI.Controllers
                           S.Sdaccta,
                           S.Anomescta
                       } into S
-                      select S.Key.Sdaccta).Sum();
+                      select S.Key.Sdaccta).SumAsync();
 
             return Ok(con);
         }
