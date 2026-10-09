@@ -1966,3 +1966,4 @@ C:\Dev\GitHub\ZeusContabilidadAPI\obj\Release\net7.0\refint\ContabilidadZeusAPI.
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Release\net7.0\ContabilidadZeusAPI.pdb
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Release\net7.0\ContabilidadZeusAPI.genruntimeconfig.cache
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Release\net7.0\ref\ContabilidadZeusAPI.dll
+C:\Dev\GitHub\ZeusContabilidadAPI\obj\Release\net7.0\swae.build.ex.cache

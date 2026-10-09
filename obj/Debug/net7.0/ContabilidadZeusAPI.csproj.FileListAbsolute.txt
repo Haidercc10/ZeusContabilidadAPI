@@ -1963,3 +1963,5 @@ C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\refint\ContabilidadZeusAPI.dl
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\ContabilidadZeusAPI.pdb
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\ContabilidadZeusAPI.genruntimeconfig.cache
 C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\ref\ContabilidadZeusAPI.dll
+C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\swae.build.ex.cache
+C:\Dev\GitHub\ZeusContabilidadAPI\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt

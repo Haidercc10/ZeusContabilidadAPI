@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "hqsfBYM1PV7Dehveha3L4/vfavQjhYQOcSlNIzvTe3U=",
-  "Source": "ContabilidadZeusAPI",
-  "BasePath": "_content/ContabilidadZeusAPI",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"kkpScqZHV6Afo/rGPUF6xX8OHnRn337EZ3orrev9Sx8=","Source":"ContabilidadZeusAPI","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
