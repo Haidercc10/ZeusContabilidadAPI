@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 309,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,19 +82,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TercerosController.cs",
-              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TercerosController.cs",
-              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
-              "RelativeToolTip": "Controllers\\TercerosController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-17T18:32:47.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
               "Title": "SaldocontBuController.cs",
               "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\SaldocontBuController.cs",
@@ -103,8 +90,7 @@
               "RelativeToolTip": "Controllers\\SaldocontBuController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-17T18:31:51.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-17T18:31:51.392Z"
             },
             {
               "$type": "Document",
@@ -116,8 +102,7 @@
               "RelativeToolTip": "Controllers\\SaldoProv_LibroPrincipalController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-08T17:48:38.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T17:48:38.998Z"
             },
             {
               "$type": "Document",
@@ -129,8 +114,7 @@
               "RelativeToolTip": "Controllers\\TransacController.cs",
               "ViewState": "AgIAAKUAAAAAAAAAAAAmwNYAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-01T16:25:22.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-01T16:25:22.659Z"
             },
             {
               "$type": "Document",
@@ -142,8 +126,7 @@
               "RelativeToolTip": "Controllers\\ClientesController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAwwD8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:46.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T16:06:46.672Z"
             },
             {
               "$type": "Document",
@@ -155,8 +138,7 @@
               "RelativeToolTip": "Controllers\\AuthenticationController .cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAUwCYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T16:06:45.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T16:06:45.33Z"
             },
             {
               "$type": "Document",
@@ -166,10 +148,22 @@
               "RelativeDocumentMoniker": "Controllers\\FacturasBUController.cs",
               "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\FacturasBUController.cs",
               "RelativeToolTip": "Controllers\\FacturasBUController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAowFIAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAOAAAAAAAAAAAAAAwOsAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-29T21:30:55.601Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TercerosController.cs",
+              "DocumentMoniker": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TercerosController.cs",
+              "ToolTip": "C:\\Dev\\GitHub\\ZeusContabilidadAPI\\Controllers\\TercerosController.cs",
+              "RelativeToolTip": "Controllers\\TercerosController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-17T18:32:47.795Z"
             },
             {
               "$type": "Document",
@@ -181,8 +175,7 @@
               "RelativeToolTip": "Controllers\\FacturasLibroPrincipal.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAIwIgAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T17:02:41.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T17:02:41.505Z"
             }
           ]
         },
