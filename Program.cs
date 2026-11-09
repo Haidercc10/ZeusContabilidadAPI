@@ -96,4 +96,22 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+// Precalentamiento: el ContabilidadContext tiene ~1.000 entidades y construir su modelo EF tarda varios segundos.
+// Se hace apenas arranca la API (en segundo plano, sin bloquear) para que la primera petición —normalmente
+// GET api/Salud desde el login de Plasticaribe— no supere el tiempo de espera del frontend.
+app.Lifetime.ApplicationStarted.Register(() => Task.Run(() =>
+{
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ContabilidadContext>();
+        _ = context.Model;              // construye y deja en caché el modelo EF
+        context.Database.CanConnect();  // abre el pool de conexiones a SQL Server
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogWarning(ex, "No se pudo precalentar ContabilidadContext; se construirá en la primera petición.");
+    }
+}));
+
 app.Run();
