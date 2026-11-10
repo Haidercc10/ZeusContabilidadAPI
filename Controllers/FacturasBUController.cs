@@ -402,5 +402,201 @@ namespace ContabilidadZeusAPI.Controllers
             return (_context.FacturasBus?.Any(e => e.IdenFacturasBu == id)).GetValueOrDefault();
         }
 
+        //==================== VERSIONES OPTIMIZADAS DE CARTERA (Dashboard Recaudos) ====================
+        // Copias de getCarteraTotal, getCarteraAgrupadaClientes y getCarteraAgrupadaVendedores que devuelven
+        // la misma información, pero:
+        //  - Calculan el último periodo (Anomesfac) una sola vez, en vez de una subconsulta dentro del WHERE.
+        //  - Eliminan las subconsultas correlacionadas por fila (Id_Fecha, Saldo_Cartera y SaldoPlazo1..5),
+        //    reemplazándolas por consultas agrupadas que se ejecutan una sola vez.
+        //  - Calculan días y plazos en memoria (Fechfac es texto y no se puede operar en SQL).
+        //  - Solo aplican los filtros de vendedor / clientes cuando vienen informados (sin LIKE '%%').
+
+        //Función que devuelve el último periodo (AAAAMM) registrado en FACTURAS_BU
+        private async Task<string?> ObtenerUltimoPeriodoCartera() =>
+            await _context.Set<FacturasBu>().AsNoTracking().MaxAsync(x => x.Anomesfac);
+
+        //CARTERA TOTAL POR FACTURA (OPTIMIZADA)
+        [HttpPost("getCarteraTotal2")]
+        public async Task<ActionResult> GetCarteraTotal2([FromBody] List<string>? clientes, string? vendedor = "")
+        {
+            clientes ??= new List<string>();
+            var hoy = DateTime.Now;
+            var fechaHoy = hoy.Date;
+            var ultimoPeriodo = await ObtenerUltimoPeriodoCartera();
+
+            //Facturas con saldo del último periodo (misma lógica de joins que getCarteraTotal)
+            var facturasQuery = from cli in _context.Set<Cliente>().AsNoTracking()
+                                join vende in _context.Set<Maevende>().AsNoTracking() on cli.Idvende equals vende.Idvende
+                                join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
+                                where fac.Sactfac > 0
+                                      && fac.Anomesfac == ultimoPeriodo
+                                      && vende.Idvende == fac.Idvende
+                                select new { cli, vende, fac };
+
+            if (!string.IsNullOrEmpty(vendedor)) facturasQuery = facturasQuery.Where(x => x.vende.Nombvende == vendedor);
+            if (clientes.Any()) facturasQuery = facturasQuery.Where(x => clientes.Contains(x.cli.Idcliente));
+
+            var facturas = await facturasQuery
+                .OrderBy(x => x.fac.Numefac)
+                .Select(x => new
+                {
+                    x.fac.Numefac,
+                    x.cli.Razoncial,
+                    x.fac.Fechfac,
+                    x.fac.Vencfac,
+                    x.vende.Nombvende,
+                    x.fac.Idvende,
+                    x.fac.Sactfac,
+                    x.fac.Fecharadicado,
+                    x.cli.Direccion,
+                    x.cli.Telefono,
+                    x.fac.Idcliprv,
+                    x.cli.Ciudad,
+                    x.cli.Diplazo,
+                }).ToListAsync();
+
+            if (!facturas.Any()) return Ok(facturas);
+
+            //Abonos (saldos negativos) del último periodo agrupados por factura: una sola consulta en vez de 6 subconsultas por fila
+            var abonos = await _context.Set<FacturasBu>().AsNoTracking()
+                .Where(x => x.Anomesfac == ultimoPeriodo && x.Sactfac < 0)
+                .GroupBy(x => x.Numefac)
+                .Select(g => new { Numefac = g.Key, Total = g.Sum(x => x.Sactfac) })
+                .ToDictionaryAsync(x => x.Numefac, x => x.Total);
+
+            //Primera fecha de radicado de cada factura (su registro más antiguo en el historial).
+            //Se hace en una sola consulta filtrando con la misma consulta de facturas (IN subconsulta), en vez de una búsqueda por fila.
+            var numerosFactura = facturasQuery.Select(x => x.fac.Numefac);
+            var historial = await _context.Set<FacturasBu>().AsNoTracking()
+                .Where(h => numerosFactura.Contains(h.Numefac))
+                .Select(h => new { h.Numefac, h.IdenFacturasBu, h.Fecharadicado })
+                .ToListAsync();
+            var primeraFechaRadicado = historial
+                .GroupBy(h => h.Numefac)
+                .ToDictionary(g => g.Key, g => g.OrderBy(h => h.IdenFacturasBu).First().Fecharadicado);
+
+            var fechaActual = hoy.ToString("yyyy/MM/dd");
+            var resultado = facturas.Select(f =>
+            {
+                var saldo = f.Sactfac + (abonos.TryGetValue(f.Numefac, out var abono) ? abono : 0);
+                var fechaFactura = DateTime.TryParse(f.Fechfac, out var fecha) ? fecha : DateTime.MinValue;
+                var diferencia = fechaHoy - fechaFactura;
+                var dias = diferencia.Days;
+
+                return new
+                {
+                    Num_Factura = f.Numefac,
+                    Nombre_CLiente = f.Razoncial,
+                    Id_Fecha = primeraFechaRadicado.GetValueOrDefault(f.Numefac),
+                    LAPSO_DOC = f.Fechfac,
+                    Fecha_Vencimiento = f.Vencfac,
+                    Nombre_Vendedor = f.Nombvende,
+                    Id_Vendedor = f.Idvende,
+                    Tipo_Movimiento = "FV",
+                    Saldo_Cartera = saldo,
+                    Fecha_Radicado = f.Fecharadicado,
+                    TipoCliente = "05",
+                    Direccion_Cliente = f.Direccion,
+                    Telefono_Cliente = f.Telefono,
+                    Id_Cliente = f.Idcliprv,
+                    Ciudad_Cliente = f.Ciudad,
+                    Plazo_De_Pago = f.Diplazo,
+                    Fecha_Actual = fechaActual,
+                    Cantidad_Dias = diferencia.TotalDays,
+                    SaldoPlazo1 = dias >= 0 && dias <= 30 ? saldo : -1,
+                    SaldoPlazo2 = dias >= 31 && dias <= 60 ? saldo : -1,
+                    SaldoPlazo3 = dias >= 61 && dias <= 90 ? saldo : -1,
+                    SaldoPlazo4 = dias >= 91 && dias <= 120 ? saldo : -1,
+                    SaldoPlazo5 = dias > 120 ? saldo : -1,
+                };
+            }).ToList();
+
+            return Ok(resultado);
+        }
+
+        //CARTERA AGRUPADA POR CLIENTES (OPTIMIZADA)
+        [HttpPost("getCarteraAgrupadaClientes2")]
+        public async Task<ActionResult> GetCarteraAgrupadaClientes2([FromBody] List<string>? clientes, string? vendedor = "")
+        {
+            clientes ??= new List<string>();
+            var ultimoPeriodo = await ObtenerUltimoPeriodoCartera();
+
+            var query = from f in _context.Set<FacturasBu>().AsNoTracking()
+                        join c in _context.Set<Cliente>().AsNoTracking() on f.Idcliprv equals c.Idcliente
+                        join v in _context.Set<Maevende>().AsNoTracking() on f.Idvende equals v.Idvende
+                        where f.Sactfac > 0 && f.Anomesfac == ultimoPeriodo
+                        select new { f, c, v };
+
+            if (!string.IsNullOrEmpty(vendedor)) query = query.Where(x => x.v.Nombvende == vendedor);
+            if (clientes.Any()) query = query.Where(x => clientes.Contains(x.c.Idcliente));
+
+            var con = await query
+                .GroupBy(x => new { x.c.Idcliente, x.c.Razoncial, x.v.Nombvende, x.f.Idvende })
+                .Select(g => new
+                {
+                    g.Key.Idcliente,
+                    g.Key.Razoncial,
+                    g.Key.Nombvende,
+                    g.Key.Idvende,
+                    SubTotal = g.Sum(x => x.f.Sactfac)
+                }).ToListAsync();
+            return Ok(con);
+        }
+
+        //CARTERA AGRUPADA POR VENDEDORES (OPTIMIZADA)
+        [HttpGet("getCarteraAgrupadaVendedores2")]
+        public async Task<ActionResult> GetCarteraAgrupadaVendedores2(string? vendedor = "")
+        {
+            var ultimoPeriodo = await ObtenerUltimoPeriodoCartera();
+
+            var query = from f in _context.Set<FacturasBu>().AsNoTracking()
+                        join v in _context.Set<Maevende>().AsNoTracking() on f.Idvende equals v.Idvende
+                        where f.Sactfac > 0 && f.Anomesfac == ultimoPeriodo
+                        select new { f, v };
+
+            if (!string.IsNullOrEmpty(vendedor)) query = query.Where(x => x.v.Nombvende == vendedor);
+
+            var con = await query
+                .GroupBy(x => new { x.v.Nombvende, x.v.Idvende })
+                .Select(g => new
+                {
+                    g.Key.Nombvende,
+                    g.Key.Idvende,
+                    SubTotal = g.Sum(x => x.f.Sactfac)
+                }).ToListAsync();
+            return Ok(con);
+        }
+
+        // CARTERA MES A MES, AÑO A AÑO (OPTIMIZADA)
+        // Copia de getCartera_Mes_Anio: en vez de 12 consultas secuenciales (una por mes) con una subconsulta MAX por fila,
+        // hace una sola consulta para los 12 periodos del año. Devuelve el mismo arreglo de 12 posiciones (null si el mes no tiene datos).
+        [HttpGet("getCartera_Mes_Anio2/{periodo}")]
+        public async Task<ActionResult> GetCartera_Mes_Anio2(string periodo)
+        {
+            var meses = Enumerable.Range(1, 12).Select(m => m.ToString("00")).ToList();
+            var periodos = meses.Select(m => $"{periodo}{m}").ToList();
+
+            //Último registro (mayor IdenFacturasBu) de cada factura dentro de cada mes
+            var ultimosRegistros = _context.Set<FacturasBu>().AsNoTracking()
+                .Where(f2 => periodos.Contains(f2.Anomesfac))
+                .GroupBy(f2 => new { f2.Anomesfac, f2.Numefac })
+                .Select(g => g.Max(x => x.IdenFacturasBu));
+
+            var totales = await _context.Set<FacturasBu>().AsNoTracking()
+                .Where(f => periodos.Contains(f.Anomesfac)
+                            && f.Sactfac > 0
+                            && f.Idvende != ""
+                            && ultimosRegistros.Contains(f.IdenFacturasBu))
+                .GroupBy(f => f.Anomesfac)
+                .Select(g => new { Anomesfac = g.Key, Valor = g.Sum(x => x.Sactfac) })
+                .ToDictionaryAsync(x => x.Anomesfac, x => x.Valor);
+
+            var datos = meses.Select(mes => totales.TryGetValue($"{periodo}{mes}", out var valor)
+                ? (object)new { Anomesfac = $"{periodo}{mes}", Mes = mes, Valor = valor }
+                : null).ToList();
+
+            return Ok(datos);
+        }
+
     }
 }
