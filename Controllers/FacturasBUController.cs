@@ -80,12 +80,11 @@ namespace ContabilidadZeusAPI.Controllers
         {
             var hoy = DateTime.Now;
 
+            //El vendedor se toma de la factura (no del cliente) para no perder facturas de clientes reasignados a otro vendedor
             var con = await (from cli in _context.Set<Cliente>().AsNoTracking()
-                      join vende in _context.Set<Maevende>().AsNoTracking() on cli.Idvende equals vende.Idvende
                       join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
+                      join vende in _context.Set<Maevende>().AsNoTracking() on fac.Idvende equals vende.Idvende
                       where fac.Sactfac > 0
-                            && cli.Idcliente == fac.Idcliprv
-                            && vende.Idvende == fac.Idvende
                             && fac.Anomesfac == (from fb in _context.Set<FacturasBu>().AsNoTracking() orderby fb.Anomesfac descending select fb.Anomesfac).FirstOrDefault()
                             && (vendedor != "" ? vende.Nombvende == vendedor : vende.Nombvende.Contains(vendedor))
                             && (clientes.Any() ? clientes.Contains(cli.Idcliente) : cli.Idcliente.Contains(""))
@@ -424,13 +423,13 @@ namespace ContabilidadZeusAPI.Controllers
             var fechaHoy = hoy.Date;
             var ultimoPeriodo = await ObtenerUltimoPeriodoCartera();
 
-            //Facturas con saldo del último periodo (misma lógica de joins que getCarteraTotal)
+            //Facturas con saldo del último periodo (misma lógica de joins que getCarteraTotal).
+            //El vendedor se toma de la factura (no del cliente) para no perder facturas de clientes reasignados a otro vendedor
             var facturasQuery = from cli in _context.Set<Cliente>().AsNoTracking()
-                                join vende in _context.Set<Maevende>().AsNoTracking() on cli.Idvende equals vende.Idvende
                                 join fac in _context.Set<FacturasBu>().AsNoTracking() on cli.Idcliente equals fac.Idcliprv
+                                join vende in _context.Set<Maevende>().AsNoTracking() on fac.Idvende equals vende.Idvende
                                 where fac.Sactfac > 0
                                       && fac.Anomesfac == ultimoPeriodo
-                                      && vende.Idvende == fac.Idvende
                                 select new { cli, vende, fac };
 
             if (!string.IsNullOrEmpty(vendedor)) facturasQuery = facturasQuery.Where(x => x.vende.Nombvende == vendedor);
