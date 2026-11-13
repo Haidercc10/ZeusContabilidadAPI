@@ -1,5 +1,4 @@
 ﻿using DBInventarioZeusAPI.Models;
-using Intercom.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -102,7 +101,7 @@ namespace ContabilidadZeusAPI.Controllers
                           Nombre_Vendedor = vende.Nombvende,
                           Id_Vendedor = fac.Idvende,
                           Tipo_Movimiento = "FV",
-                          Saldo_Cartera = fac.Sactfac + (from fbu in _context.Set<FacturasBu>().AsNoTracking() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum(),
+                          Saldo_Cartera = fac.Sactfac + (from fbu in _context.Set<FacturasBu>().AsNoTracking() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum(),
                           Fecha_Radicado = fac.Fecharadicado,
                           TipoCliente = "05",
                           Direccion_Cliente = cli.Direccion,
@@ -112,11 +111,11 @@ namespace ContabilidadZeusAPI.Controllers
                           Plazo_De_Pago = cli.Diplazo,
                           Fecha_Actual = hoy.ToString("yyyy/MM/dd"),
                           Cantidad_Dias = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")).Subtract(Convert.ToDateTime(fac.Fechfac))).TotalDays, 
-                          SaldoPlazo1 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 0 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 30 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
-                          SaldoPlazo2 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 31 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 60 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
-                          SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 90 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
-                          SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1,
-                          SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days > 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac == null ? 0 : fbu.Sactfac).Sum() : -1
+                          SaldoPlazo1 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 0 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 30 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo2 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 31 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 60 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo3 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 61 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 90 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo4 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days >= 91 && (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days <= 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum() : -1,
+                          SaldoPlazo5 = (Convert.ToDateTime(hoy.ToString("yyyy/MM/dd")) - Convert.ToDateTime(fac.Fechfac)).Days > 120 ? fac.Sactfac + (from fbu in _context.Set<FacturasBu>() where fbu.Anomesfac == fac.Anomesfac && fbu.Sactfac < 0 && fbu.Numefac == fac.Numefac select fbu.Sactfac).Sum() : -1
                       }).ToListAsync();
             return Ok(con);
         }
